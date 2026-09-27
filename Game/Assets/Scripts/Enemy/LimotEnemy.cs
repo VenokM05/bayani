@@ -24,10 +24,12 @@ namespace Bayani.Enemy
         private MaterialPropertyBlock _mpb;
         private CharacterController _cc;   // optional; falls back to transform move
         private bool _staggered;
+        private Vector3 _baseScale = Vector3.one;
 
         private void Awake()
         {
             _hp = data.maxHP;
+            _baseScale = transform.localScale;
             _visual = GetComponentInChildren<Renderer>();
             _mpb = new MaterialPropertyBlock();
             _cc = GetComponent<CharacterController>();
@@ -49,25 +51,44 @@ namespace Bayani.Enemy
                     break;
 
                 case State.Chase:
-                    MoveToward(target.position, data.moveSpeed);
-                    FaceTarget(target);
-                    if (dist <= data.attackRange * 0.9f) Enter(State.Telegraph);
+                    if (data.behavior == EnemyData.Behavior.Ranged)
+                    {
+                        // Lingid: keep standoff distance, side-step would come later
+                        if (dist > data.attackRange * 0.8f) MoveToward(target.position, data.moveSpeed);
+                        else if (dist < data.attackRange * 0.5f) MoveToward(target.position, -data.moveSpeed * 0.7f);
+                        FaceTarget(target);
+                        if (dist <= data.attackRange * 1.15f) Enter(State.Telegraph);
+                    }
+                    else
+                    {
+                        MoveToward(target.position, data.moveSpeed);
+                        FaceTarget(target);
+                        if (dist <= data.attackRange * 0.9f) Enter(State.Telegraph);
+                    }
                     break;
 
                 case State.Telegraph:
                     // Stand still, glow + grow: the "hit me now" advertisement (>=0.6s per phasing gate)
-                    PulseVisual(1f + 0.15f * Mathf.PingPong(Time.time * 4f, 1f), new Color(1f, 0.25f, 0.1f));
+                    PulseVisual(1f + 0.15f * Mathf.PingPong(Time.time * 4f, 1f), TelegraphColor);
                     FaceTarget(target);
                     if (Time.time >= _stateUntil)
                     {
-                        if (hitbox != null)
+                        if (data.behavior == EnemyData.Behavior.Ranged)
                         {
-                            hitbox.damage = data.attackDamage;
-                            hitbox.knockback = 2f;
-                            hitbox.transform.rotation = transform.rotation;
-                            hitbox.ActivateWindow();
+                            FireProjectile(target);
+                            Enter(State.Recover);
                         }
-                        Enter(State.Attack);
+                        else
+                        {
+                            if (hitbox != null)
+                            {
+                                hitbox.damage = data.attackDamage;
+                                hitbox.knockback = 2f;
+                                hitbox.transform.rotation = transform.rotation;
+                                hitbox.ActivateWindow();
+                            }
+                            Enter(State.Attack);
+                        }
                     }
                     break;
 
@@ -85,6 +106,27 @@ namespace Bayani.Enemy
                     if (Time.time >= _stateUntil) Enter(State.Chase);
                     break;
             }
+        }
+
+        private Color TelegraphColor => data.behavior switch
+        {
+            EnemyData.Behavior.Ranged => new Color(1f, 0.55f, 0.1f),   // orange = incoming shot
+            EnemyData.Behavior.Tank => new Color(0.8f, 0.1f, 0.45f),   // magenta = heavy, sidestep!
+            _ => new Color(1f, 0.25f, 0.1f),                            // red = melee
+        };
+
+        private void FireProjectile(Transform target)
+        {
+            var p = new GameObject("LingidShot");
+            Vector3 origin = transform.position + Vector3.up * 0.7f;
+            Vector3 dir = (target.position + Vector3.up * 0.6f - origin).normalized;
+            p.transform.position = origin + dir * 0.6f;
+            var shot = p.AddComponent<Projectile>();
+            shot.speed = data.projectileSpeed;
+            shot.damage = data.attackDamage;
+            shot.team = Hitbox.Team.Enemy;
+            shot.owner = gameObject;
+            shot.Init(dir);
         }
 
         private void Enter(State s)
@@ -120,7 +162,7 @@ namespace Bayani.Enemy
 
         private void PulseVisual(float scale, Color tint)
         {
-            transform.localScale = Vector3.one * scale;
+            transform.localScale = _baseScale * scale;
             if (_visual == null) return;
             _visual.GetPropertyBlock(_mpb);
             _mpb.SetColor("_BaseColor", tint);
@@ -133,8 +175,8 @@ namespace Bayani.Enemy
             if (_state == State.Dead) return;
             _hp -= damage;
 
-            // HEAVY hits (knockback >= 3) stagger: interrupt telegraph/attack, halve recovery entry
-            if (knockback >= 3f && (_state == State.Telegraph || _state == State.Attack))
+            // Strong-enough hits interrupt telegraphs — poise per variant (Bantay resists everything but parry)
+            if (knockback >= data.staggerKnockback && (_state == State.Telegraph || _state == State.Attack))
             {
                 hitbox?.DeactivateWindow();
                 _staggered = true;
@@ -142,6 +184,18 @@ namespace Bayani.Enemy
             }
 
             if (_hp <= 0f) Die();
+        }
+
+        /// <summary>A successful player PARRY always staggers, even tanks — long open window.</summary>
+        public void NotifyParried()
+        {
+            if (_state == State.Dead) return;
+            hitbox?.DeactivateWindow();
+            _staggered = false;                        // full, extra-long recovery: the parry reward
+            _state = State.Recover;
+            _stateUntil = Time.time + data.recoverTime * 1.8f;
+            PulseVisual(1f, new Color(0.55f, 0.4f, 0.6f));
+            Debug.Log($"[BAYANI] {data.enemyName} parried — punish window open");
         }
 
         private void Die()

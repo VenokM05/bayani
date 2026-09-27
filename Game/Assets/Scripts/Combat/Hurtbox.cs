@@ -16,6 +16,10 @@ namespace Bayani.Combat
         public event Action<float, Vector3> OnTookDamage;   // (amount, fromPos) → hit-flash/knockback
         public event Action OnBlockedByIFrame;              // perfect-dodge candidate
 
+        /// <summary>PlayerCombat hooks this: return true = hit fully deflected (block/parry), no damage applied.</summary>
+        public delegate bool DeflectHandler(float damage, Vector3 fromPos, GameObject attacker);
+        public DeflectHandler OnDeflect;
+
         private CombatResources _resources;             // player only (null on enemies)
         private IDamageable _damageable;                // enemies implement this
 
@@ -27,13 +31,19 @@ namespace Bayani.Combat
 
         public void SetInvulnerable(bool value) => IsInvulnerable = value;
 
-        public void TakeDamage(float damage, Vector3 fromPos, float knockback)
+        public void TakeDamage(float damage, Vector3 fromPos, float knockback) =>
+            TakeDamage(damage, fromPos, knockback, null);
+
+        public void TakeDamage(float damage, Vector3 fromPos, float knockback, GameObject attacker)
         {
             if (IsInvulnerable)
             {
                 OnBlockedByIFrame?.Invoke();
                 return;
             }
+
+            if (OnDeflect != null && OnDeflect(damage, fromPos, attacker))
+                return;   // blocked or parried — handler applied costs/rewards itself
 
             if (_damageable != null) _damageable.ApplyDamage(damage, fromPos, knockback);
             else if (_resources != null) _resources.TakeHit(damage);

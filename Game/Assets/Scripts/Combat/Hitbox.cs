@@ -41,7 +41,7 @@ namespace Bayani.Combat
             if (_hitThisWindow.Contains(hurt)) return;     // one hit per window per target
 
             _hitThisWindow.Add(hurt);
-            hurt.TakeDamage(damage, transform.position, knockback);
+            hurt.TakeDamage(damage, transform.position, knockback, owner);
             OnLanded?.Invoke(hurt);
         }
 

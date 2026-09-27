@@ -16,6 +16,17 @@ namespace Bayani.Core
 
         private Vector3 _velocity;
 
+        // --- Impulse shake (phasing 1B): heavy hits, parries, player damage ---
+        private float _shakeAmp;
+        private float _shakeUntil;
+
+        /// <summary>Adds a shake impulse; overlapping impulses take the stronger amplitude.</summary>
+        public void AddShake(float amplitude, float duration)
+        {
+            _shakeAmp = Mathf.Max(_shakeAmp, amplitude);
+            _shakeUntil = Mathf.Max(_shakeUntil, Time.time + duration);
+        }
+
         private void LateUpdate()
         {
             if (target == null) return;
@@ -30,6 +41,19 @@ namespace Bayani.Core
 
             transform.position = Vector3.SmoothDamp(transform.position, desired, ref _velocity, smoothTime);
             transform.LookAt(anchor, Vector3.up);
+
+            // Shake: decaying random offset applied after positioning
+            if (Time.time < _shakeUntil)
+            {
+                float decay = (_shakeUntil - Time.time) / Mathf.Max(0.01f, _shakeUntil - Time.time + 0.15f);
+                Vector3 off = Random.insideUnitSphere * _shakeAmp * Mathf.Clamp01(decay);
+                off.y *= 0.5f;                                   // less vertical nausea
+                transform.position += off;
+            }
+            else
+            {
+                _shakeAmp = 0f;
+            }
         }
     }
 }

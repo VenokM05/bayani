@@ -50,13 +50,9 @@ namespace Bayani.Player
 
         private void Update()
         {
-            Vector2 move = (!ControlsEnabled || Keyboard.current == null) ? Vector2.zero
-                : new Vector2(
-                    (Keyboard.current.dKey.isPressed ? 1f : 0f) - (Keyboard.current.aKey.isPressed ? 1f : 0f),
-                    (Keyboard.current.wKey.isPressed ? 1f : 0f) - (Keyboard.current.sKey.isPressed ? 1f : 0f));
+            Vector2 move = ControlsEnabled ? Bayani.Core.BayaniInput.Move : Vector2.zero;
 
-            bool running = ControlsEnabled && Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed
-                           && move.sqrMagnitude > 0.01f;
+            bool running = ControlsEnabled && Bayani.Core.BayaniInput.Sprint && move.sqrMagnitude > 0.01f;
             // Sprint costs 10 stamina/s (ggd §56.2); no sprint when the meter is empty
             if (running && _resources != null)
             {
@@ -84,7 +80,7 @@ namespace Bayani.Player
             if (_cc.isGrounded)
             {
                 _verticalVelocity = -1f;
-                if (ControlsEnabled && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+                if (ControlsEnabled && Bayani.Core.BayaniInput.JumpPressed)
                     _verticalVelocity = Mathf.Sqrt(2f * -gravity * jumpHeight);
             }
             else
@@ -100,8 +96,8 @@ namespace Bayani.Player
 
         private void HandleLook()
         {
-            if (lookCamera == null || Mouse.current == null) return;
-            Vector2 delta = Mouse.current.delta.ReadValue() * mouseSensitivity;
+            if (lookCamera == null) return;
+            Vector2 delta = Bayani.Core.BayaniInput.Look * mouseSensitivity;
             transform.Rotate(0f, delta.x, 0f);                       // yaw the player
             _cameraPitch = Mathf.Clamp(_cameraPitch - delta.y, -30f, 70f); // pitch the camera
         }

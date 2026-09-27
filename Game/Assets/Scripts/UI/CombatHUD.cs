@@ -47,8 +47,8 @@ namespace Bayani.UI
             if (Time.unscaledTime < _flashUntil)
                 GUI.Label(new Rect(x + w + 14f, 72f, 200f, 24f), $"<b>{_flash}</b>");
 
-            GUI.Label(new Rect(20f, Screen.height - 30f, 700f, 24f),
-                "LMB combo (L-L-L-H)  |  RMB dodge (i-frames)  |  Q Diwa burst  |  WASD/Shift/Space move");
+            GUI.Label(new Rect(20f, Screen.height - 30f, 900f, 24f),
+                "ATTACK LMB/LT · HOLD BLOCK RMB/X (perfect-timed = PARRY +12) · DODGE LCtrl/RT · SKILL Q/Y · MOVE WASD/stick");
         }
 
         private void Bar(float x, float y, float w, float pct, Color c, string label)

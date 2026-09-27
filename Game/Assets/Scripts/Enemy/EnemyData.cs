@@ -8,12 +8,16 @@ namespace Bayani.Enemy
     [CreateAssetMenu(menuName = "BAYANI/Enemy Data", fileName = "EnemyData")]
     public class EnemyData : ScriptableObject
     {
+        public enum Behavior { Melee, Ranged, Tank }
+
         public string enemyName = "Anino";
+        public Behavior behavior = Behavior.Melee;
 
         [Header("Combat")]
         public float maxHP = 30f;
         public float attackDamage = 12f;       // player HP scale: ~5 hits = death
-        public float attackRange = 1.7f;
+        public float attackRange = 1.7f;       // ranged: preferred standoff distance
+        public float staggerKnockback = 3f;    // hits with knockback >= this interrupt telegraphs (Bantay resists)
 
         [Header("Fairness (phasing 1.7: telegraph >= 0.6s)")]
         public float moveSpeed = 3.2f;
@@ -26,5 +30,8 @@ namespace Bayani.Enemy
         public float diwaOnKill = 6f;          // +6 Diwa per kill
         public float xpOnKill = 40f;           // Phase 2 XP hooks in; stored now
         public float stabilityOnKill = 5f;     // +5 Memory Stability (ggd §56.3)
+
+        [Header("Ranged only")]
+        public float projectileSpeed = 11f;
     }
 }

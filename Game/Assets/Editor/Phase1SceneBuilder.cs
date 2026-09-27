@@ -34,6 +34,8 @@ namespace Bayani.EditorTools
             var heavy = GetOrCreate($"{DataDir}/Attack_Heavy.asset", MakeHeavy());
             var skill = GetOrCreate($"{DataDir}/Attack_DiwaBurst.asset", MakeSkill());
             var anino = GetOrCreate($"{DataDir}/Enemy_Anino.asset", ScriptableObject.CreateInstance<EnemyData>());
+            var lingid = GetOrCreate($"{DataDir}/Enemy_Lingid.asset", MakeLingid());
+            var bantay = GetOrCreate($"{DataDir}/Enemy_Bantay.asset", MakeBantay());
 
             // ---------- 2) Player rig ----------
             var kai = GameObject.Find("Kai");
@@ -61,9 +63,11 @@ namespace Bayani.EditorTools
             combat.combo = new[] { light1, light2, light3, heavy };
             combat.skill = skill;
 
-            // ---------- 3) Enemies ----------
-            SpawnEnemyIfMissing("Anino_1", new Vector3(4f, 1.2f, 3f), combat, anino);
-            SpawnEnemyIfMissing("Anino_2", new Vector3(-4f, 1.2f, 5f), combat, anino);
+            // ---------- 3) Enemies: melee pair + ranged + tank (phasing 1.9 variants) ----------
+            SpawnEnemyIfMissing("Anino_1", new Vector3(4f, 1.2f, 3f), combat, anino, Vector3.one);
+            SpawnEnemyIfMissing("Anino_2", new Vector3(-4f, 1.2f, 5f), combat, anino, Vector3.one);
+            SpawnEnemyIfMissing("Lingid_1", new Vector3(7f, 1.4f, -2f), combat, lingid, Vector3.one * 0.85f);
+            SpawnEnemyIfMissing("Bantay_1", new Vector3(-7f, 1.4f, -1f), combat, bantay, Vector3.one * 1.3f);
 
             // ---------- 4) HUD ----------
             if (Object.FindFirstObjectByType<CombatHUD>() == null)
@@ -84,12 +88,13 @@ namespace Bayani.EditorTools
                 "→ Does hitting a cube with L-L-L-H feel good?", "OK");
         }
 
-        private static void SpawnEnemyIfMissing(string name, Vector3 pos, PlayerCombat player, EnemyData data)
+        private static void SpawnEnemyIfMissing(string name, Vector3 pos, PlayerCombat player, EnemyData data, Vector3 scale)
         {
             if (GameObject.Find(name) != null) return;
             var go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             go.name = name;
             go.transform.position = pos;
+            go.transform.localScale = scale;
             Object.DestroyImmediate(go.GetComponent<CapsuleCollider>());
             go.AddComponent<CharacterController>().center = Vector3.zero;
 
@@ -154,6 +159,32 @@ namespace Bayani.EditorTools
             a.damage = 25f; a.diwaCost = 25f;          // spends earned Diwa, big hit
             a.knockback = 4f; a.range = 2.2f;
             return a;
+        }
+
+        private static EnemyData MakeLingid()
+        {
+            var d = ScriptableObject.CreateInstance<EnemyData>();
+            d.enemyName = "Lingid";
+            d.behavior = EnemyData.Behavior.Ranged;
+            d.maxHP = 20f; d.attackDamage = 10f; d.attackRange = 6f;      // standoff distance
+            d.moveSpeed = 2.6f; d.telegraphTime = 0.9f;                    // orange glow = shot incoming
+            d.recoverTime = 1.1f; d.aggroRadius = 10f; d.projectileSpeed = 11f;
+            d.staggerKnockback = 2f;                                       // low poise — any strong hit cancels the shot
+            d.diwaOnKill = 6f; d.xpOnKill = 35f;
+            return d;
+        }
+
+        private static EnemyData MakeBantay()
+        {
+            var d = ScriptableObject.CreateInstance<EnemyData>();
+            d.enemyName = "Bantay";
+            d.behavior = EnemyData.Behavior.Tank;
+            d.maxHP = 70f; d.attackDamage = 18f; d.attackRange = 2.2f;
+            d.moveSpeed = 2.2f; d.telegraphTime = 0.8f;                    // magenta glow = sidestep, don't trade
+            d.attackActiveTime = 0.2f; d.recoverTime = 1.2f; d.aggroRadius = 9f;
+            d.staggerKnockback = 6f;                                       // resists everything EXCEPT a parry
+            d.diwaOnKill = 10f; d.xpOnKill = 80f;
+            return d;
         }
     }
 }
