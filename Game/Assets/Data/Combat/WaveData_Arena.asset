@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea3098cd20f4d64c80dbfb27c86cb1c, type: 3}
+  m_Name: WaveData_Arena
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Enemy.WaveData
+  waves:
+  - entries:
+    - enemyPrefab: {fileID: 6668034592137831972, guid: 559d6ebd6f62e68499bec87040352b1b, type: 3}
+      count: 2
+      spacing: 1.2
+    startDelay: 3
+  - entries:
+    - enemyPrefab: {fileID: 6668034592137831972, guid: 559d6ebd6f62e68499bec87040352b1b, type: 3}
+      count: 3
+      spacing: 1
+    - enemyPrefab: {fileID: 439774322875858791, guid: 6794f9e9a41db5b49b46cbb8090e266b, type: 3}
+      count: 1
+      spacing: 1
+    startDelay: 3
+  - entries:
+    - enemyPrefab: {fileID: 6668034592137831972, guid: 559d6ebd6f62e68499bec87040352b1b, type: 3}
+      count: 4
+      spacing: 0.8
+    - enemyPrefab: {fileID: 439774322875858791, guid: 6794f9e9a41db5b49b46cbb8090e266b, type: 3}
+      count: 2
+      spacing: 1
+    - enemyPrefab: {fileID: 8454988887409334418, guid: 73a15d9d2e71dfb4fbf96b7ef47d9180, type: 3}
+      count: 1
+      spacing: 1
+    startDelay: 3
+  interWaveDelay: 5
+  clearHold: 1.5

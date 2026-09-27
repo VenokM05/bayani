@@ -18,6 +18,7 @@ namespace Bayani.Enemy
 
         private enum State { Idle, Chase, Telegraph, Attack, Recover, Dead }
         private State _state = State.Idle;
+        public bool IsDead => _state == State.Dead;   // wave spawner checks this for clear conditions
         private float _stateUntil;
         private float _hp;
         private Renderer _visual;
@@ -28,6 +29,7 @@ namespace Bayani.Enemy
 
         private void Awake()
         {
+            if (player == null) player = FindFirstObjectByType<PlayerCombat>();  // runtime-spawned prefabs self-wire
             _hp = data.maxHP;
             _baseScale = transform.localScale;
             _visual = GetComponentInChildren<Renderer>();

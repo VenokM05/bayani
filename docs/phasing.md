@@ -53,7 +53,9 @@ Total realistic calendar to a showable slice: **~5–7 months part-time** (draft
 
 ---
 
-## Phase 1 — Combat Core (target: 4–6 weeks) 🔴 THE GATE
+## Phase 1 — Combat Core ✅ CLOSED (target: 4–6 weeks) 🔴 THE GATE
+
+> **Verdict 2026-09-27 (playtest):** fighting 4 enemies "feels like decisions" · 0.2 s parry lands *sometimes* (keep) · Bantay reads as "parry me", not a wall. 1A+1B committed (`0e3d678`, `4a2ad1b`).
 
 **Goal:** answer *the* question — **"Is it fun to control Kai in a fight?"** — with cubes and Mixamo only.
 
@@ -68,15 +70,15 @@ Total realistic calendar to a showable slice: **~5–7 months part-time** (draft
 | 1.7 | Anino enemy: NavMesh chase → telegraph (≥0.6 s windup) → attack → recover → death | One enemy, one behavior; must be *fair*, not complex |
 | 1.8 | Stamina + Diwa meters per ggd §56.2 (drain/regen values as ScriptableObject) | Numerically compliant on first play |
 | 1.9 | 2–3 enemy variants by stat tweaking only (fast/ tanky via `EnemyData` SO) | Proves the SO data pipeline |
-| 1.10 | Wave arena: 1→3 enemies, dodge-heavy encounters | Combat sandbox scene |
+| 1.10 | Wave arena: 1→3 enemies, dodge-heavy encounters | Combat sandbox scene — ✅ built via `Tools → BAYANI → Phase 1.10` (spawn ring + `WaveData_Arena.asset`, 3 waves → 10 alive) |
 
 **Playtest checkpoints (weekly):** after 1.4 → does the combo rhythm feel right? After 1.6 → do you *feel* a hit land? After 1.7 → is one enemy interesting for 5 minutes?
 
 **Exit gate (all required):**
-- [ ] 5-minute combat loop is **replayable by choice, not obligation**
-- [ ] Dodge/parry matter (you get punished for mashing)
-- [ ] Runs 60 FPS on target PC with 10 enemies
-- [ ] Combat values live in ScriptableObjects, not hard-coded
+- [x] 5-minute combat loop is **replayable by choice, not obligation**
+- [x] Dodge/parry matter (you get punished for mashing)
+- [ ] Runs 60 FPS on target PC with 10 enemies — *final check: play the 1.10 wave arena, watch the Stat overlay*
+- [x] Combat values live in ScriptableObjects, not hard-coded
 
 **If this gate fails → STOP.** Redesign combat before any world content exists. This is the whole point of phasing.
 
@@ -94,7 +96,7 @@ Total realistic calendar to a showable slice: **~5–7 months part-time** (draft
 | 2.4 | Memory Stability v1 per §56.3 (zone score, desaturation/fog gradient, spawn scaling) |
 | 2.5 | Duwende puzzle encounter: trick chest → footprint trail → hidden reward (blueprints §17) |
 | 2.6 | Small hand-built jungle graybox with 1 artifact + 1 duwende + 2 Anino |
-| 2.7 | Dialogue system v1: on-screen speaker + [Continue] (ggd §37), TALA voice via SO-driven lines |
+| 2.7 | Dialogue system v1: on-screen speaker + [Continue] (ggd §37), TALA voice via SO-driven lines — ✅ DELIVERED early in the 2187 prologue (`Bayani.Story`, commit `5705ede`) |
 | 2.8 | Local save/load (JSON: player state, quests, codex, stability) — §46 Local Save only |
 | 2.9 | **Assemble the core §47 5-minute sequence**: jungle walk → duwende → Limot → fight → artifact → scan → hidden path → Kapre silhouette → cut |
 
