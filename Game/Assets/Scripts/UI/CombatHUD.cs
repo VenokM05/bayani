@@ -26,6 +26,14 @@ namespace Bayani.UI
         private void Update()
         {
             _fps = Mathf.Lerp(_fps, 1f / Time.unscaledDeltaTime, Time.unscaledDeltaTime * 4f);
+            // retry lookups each frame until found: the HUD may Start() before a
+            // scene-loaded/spawned player exists, and components arrive with the installer
+            if (_res == null)
+            {
+                _res = FindFirstObjectByType<CombatResources>();
+                if (_res != null) _res.OnResourceChanged += OnResourceChanged;
+            }
+            if (_combat == null) _combat = FindFirstObjectByType<PlayerCombat>();
             if (_prog == null) _prog = FindFirstObjectByType<PlayerProgression>();
             if (_skills == null) _skills = FindFirstObjectByType<PlayerSkills>();
             if (!string.IsNullOrEmpty(ProgressStore.Toast))
@@ -59,16 +67,19 @@ namespace Bayani.UI
 
         private void OnGUI()
         {
-            if (_res == null) return;
+            if (_res == null && _prog == null) return;   // nothing to show yet
             float w = 260f, x = 20f;
 
             // §6: HP shows current/max numbers, not just a fill
-            Bar(x, 20f, w, _res.HP / _res.MaxHP, new Color(0.85f, 0.25f, 0.25f),
-                $"HP {_res.HP:0}/{_res.MaxHP:0}");
-            Bar(x, 46f, w, _res.Stamina / _res.MaxStamina, new Color(0.3f, 0.8f, 0.4f),
-                $"STAMINA {_res.Stamina:0}/{_res.MaxStamina:0}");
-            Bar(x, 72f, w, _res.Diwa / _res.MaxDiwa, new Color(0.35f, 0.55f, 0.95f),
-                $"DIWA {_res.Diwa:0}/{_res.MaxDiwa:0}");
+            if (_res != null)
+            {
+                Bar(x, 20f, w, _res.HP / _res.MaxHP, new Color(0.85f, 0.25f, 0.25f),
+                    $"HP {_res.HP:0}/{_res.MaxHP:0}");
+                Bar(x, 46f, w, _res.Stamina / _res.MaxStamina, new Color(0.3f, 0.8f, 0.4f),
+                    $"STAMINA {_res.Stamina:0}/{_res.MaxStamina:0}");
+                Bar(x, 72f, w, _res.Diwa / _res.MaxDiwa, new Color(0.35f, 0.55f, 0.95f),
+                    $"DIWA {_res.Diwa:0}/{_res.MaxDiwa:0}");
+            }
 
             // Memory Stability row — only when a zone exists (ggd §56.3; HUD starts at 80%)
             var zone = MemoryStabilityZone.Current;
