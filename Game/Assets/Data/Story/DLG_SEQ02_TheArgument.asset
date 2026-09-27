@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50060b8dc62b41a419acff01334cb145, type: 3}
+  m_Name: DLG_SEQ02_TheArgument
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.DialogueAsset
+  lines:
+  - speaker: KAI
+    text: You're hiding something from me.
+  - speaker: PARENT
+    text: Kai, stop asking questions.
+  - speaker: KAI
+    text: It's my family.
+  - speaker: PARENT
+    text: You don't understand.
+  - speaker: KAI
+    text: Then explain it to me!
+  - speaker: NARRATION
+    text: The parent grabs the artifact. For the first time, Kai sees fear in their
+      parent's eyes.
+  - speaker: PARENT
+    text: Never use this.
+  - speaker: KAI
+    text: Why?
+  - speaker: PARENT
+    text: Because it doesn't bring people back.
+  - speaker: KAI
+    text: Then what does it do?
+  - speaker: NARRATION
+    text: Silence.

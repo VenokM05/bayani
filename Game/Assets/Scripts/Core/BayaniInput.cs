@@ -73,6 +73,12 @@ namespace Bayani.Core
             (Keyboard.current?.dKey.wasPressedThisFrame ?? false) ||
             (Gamepad.current?.buttonNorth.wasPressedThisFrame ?? false);
 
+        // Interact / dialogue advance: E / Enter / gamepad A (story sequences, no combat use).
+        public static bool InteractPressed =>
+            (Keyboard.current?.eKey.wasPressedThisFrame ?? false) ||
+            (Keyboard.current?.enterKey.wasPressedThisFrame ?? false) ||
+            (Gamepad.current?.buttonSouth.wasPressedThisFrame ?? false);
+
         private static Vector2 Deadzone(Vector2 v) =>
             v.sqrMagnitude >= StickDeadzone * StickDeadzone ? v : Vector2.zero;
     }

@@ -7,7 +7,7 @@
 
 | SEQ | Beat | Content | Unity status |
 |---|---|---|---|
-| 01–05 | 2187, argument, transit, activation | `locations/ruins-2187.md` | not built |
+| 01–05 | 2187, argument, transit, activation | `locations/ruins-2187.md` | **graybox built** — Tools → BAYANI → Phase 2 prologue (SC_00_FutureManila) |
 | 06–08 | Arrival, Sugbu, court | `locations/cebu-1521.md`, `characters/humabon.md` | not built |
 | **07B** | **The First Shadow** (combat tutorial) | `enemies/anino.md` | combat core built (Phase 1) |
 | 09 | Mactan, Lapu-Lapu seen | `locations/mactan-1521.md`, `characters/lapu-lapu.md` | not built |
@@ -22,4 +22,4 @@
 `CH_0005` Elder of Cebu · `CH_0006` Warrior of the Night Before · `AR_ARTIFACT` · `QU_000`–`QU_002`
 
 ## Build state
-Only Phase 0 + Phase 1 combat graybox exists (`Game/Assets/Scripts/`, `Assets/Data/Combat/`). Chapter 1 scenes `SC_03`–`SC_05` are unbuilt — see `docs/phasing.md` for the order.
+Phase 0 + Phase 1 combat graybox (`Game/Assets/Scripts/`, `Assets/Data/Combat/`) + SEQ 01–05 prologue (`Assets/Scenes/Chapter1/SC_00_FutureManila.unity`, dialogue in `Assets/Data/Story/`). Phase 1 gate = playtest verdict still open. Chapter 1 scenes `SC_03`–`SC_05` unbuilt — see `docs/phasing.md`.
