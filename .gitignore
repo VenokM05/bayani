@@ -1,0 +1,72 @@
+# ==============================
+# BAYANI — Unity + Laravel monorepo .gitignore
+# Unity project will live under Game/
+# ==============================
+
+# --- Unity ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Never ignore Asset meta files
+![Aa]ssets/**/*.meta
+
+# Unity generated scene/session files
+*.unitypackage
+*.app
+/ExportedObj/
+Assets/AddressableAssetsData/*/*.bin*
+Assets/StreamingAssets/aa/
+Assets/HybridCLRGenerate/
+
+# Jetbrains Rider / Visual Studio / VS Code
+.idea/
+.vs/
+.vscode/
+!/.vscode/settings.json
+!/.vscode/extensions.json
+!/.vscode/launch.json
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity crash reports & OS junk
+sysinfo.txt
+*.stackdump
+hs_err_pid*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Laravel backend (post-slice, api/) ---
+/api/vendor/
+/api/node_modules/
+/api/public/hot/
+/api/public/storage/
+/api/storage/logs/
+/api/storage/framework/cache/data/
+/api/storage/framework/sessions/
+/api/storage/framework/views/
+/api/.env
+/api/.env.backup
+/api/auth.json
+/api/plan.txt
+
+# --- Tooling ---
+/node_modules/
+*.log
