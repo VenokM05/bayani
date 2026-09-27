@@ -64,7 +64,7 @@ namespace Bayani.UI
                 GUI.Label(new Rect(x + w + 14f, 72f, 200f, 24f), $"<b>{_flash}</b>");
 
             GUI.Label(new Rect(20f, Screen.height - 30f, 900f, 24f),
-                "ATTACK LMB/LT · HOLD BLOCK RMB/X (perfect-timed = PARRY +12) · DODGE LCtrl/RT · SKILL Q/Y · MOVE WASD/stick");
+                "ATTACK LMB/LT · HOLD BLOCK RMB/X (perfect-timed = PARRY +12) · DODGE LCtrl/RT · SKILL Q/Y · INTERACT E/F · MOVE WASD/stick");
 
             // FPS, top-right: green ≥55 · yellow ≥40 · red below (60 FPS gate check)
             var fs = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperRight, fontSize = 16, fontStyle = FontStyle.Bold };

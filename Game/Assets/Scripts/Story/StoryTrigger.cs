@@ -12,7 +12,7 @@ namespace Bayani.Story
     {
         public DialogueAsset dialogue;
         public bool requiresInteract;
-        public string prompt = "[E] Examine";
+        public string prompt = "[E/F] Examine";
         public string titleCard;            // shown when the sequence starts ("" = none)
         public bool flashOnStart;           // SEQ 04 vision flash
         public string finaleCaption;        // if set: after dialogue, fade to black and hold this text

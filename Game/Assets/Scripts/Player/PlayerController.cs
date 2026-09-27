@@ -29,7 +29,7 @@ namespace Bayani.Player
         [SerializeField] private float mouseSensitivity = 0.1f;
 
         [Header("Visuals")]
-        [SerializeField] private Transform visual;   // body mesh that turns toward movement; auto-created if empty
+        public Transform visual;   // body mesh that turns toward movement; set by Kai-model tool, auto-created otherwise
 
         private CharacterController _cc;
         private Vector3 _planarVelocity;
@@ -42,14 +42,18 @@ namespace Bayani.Player
         /// <summary>PlayerCombat locks controls during attacks/dodges (phasing 1.4).</summary>
         public bool ControlsEnabled = true;
 
+        /// <summary>Smoothed planar velocity — read by KaiWalkBob for bob/lean intensity.</summary>
+        public Vector3 PlanarVelocity => _planarVelocity;
+
         private void Awake()
         {
             _cc = GetComponent<CharacterController>();
             if (lookCamera == null) lookCamera = Camera.main;
             _resources = GetComponent<Bayani.Combat.CombatResources>();
 
-            // Visual/body separation: if the mesh renderer sits on the root (graybox capsule),
-            // move it under a runtime "Visual" child so body facing never touches the root yaw.
+            // Visual/body separation: the graybox capsule's renderer sits ON this root, and a
+            // root can't be reparented under its own child — so copy mesh+materials onto a
+            // runtime "Visual" child and disable the original. Body facing then never touches root yaw.
             if (visual == null)
             {
                 var r = GetComponent<Renderer>();
@@ -57,7 +61,10 @@ namespace Bayani.Player
                 {
                     var vis = new GameObject("Visual");
                     vis.transform.SetParent(transform, false);
-                    r.transform.SetParent(vis.transform, false);
+                    var mf = GetComponent<MeshFilter>();
+                    if (mf != null) vis.AddComponent<MeshFilter>().sharedMesh = mf.sharedMesh;
+                    vis.AddComponent<MeshRenderer>().sharedMaterials = r.sharedMaterials;
+                    r.enabled = false;
                     visual = vis.transform;
                 }
                 else visual = transform;   // no renderer at all — fall back to root rotation

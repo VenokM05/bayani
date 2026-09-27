@@ -114,7 +114,7 @@ namespace Bayani.EditorTools
             Box("Table", new Vector3(0f, 0.45f, 4.5f), new Vector3(1.6f, 0.9f, 1f));
 
             Prop("Family_Book", new Vector3(0f, 1.05f, 4.5f), new Vector3(0.5f, 0.08f, 0.36f), seq01,
-                prompt: "[E] Open the family book");
+                prompt: "[E/F] Open the family book");
 
             Trigger("SEQ02_DoorArgument", new Vector3(0f, 1.2f, 10.5f), new Vector3(3f, 2.4f, 1.6f), seq02, auto: true);
 
@@ -135,10 +135,10 @@ namespace Bayani.EditorTools
             Box("Ruin_Roof", new Vector3(0f, 4.2f, 70f), new Vector3(14f, 0.6f, 9f));
 
             Prop("Ancient_Wall", new Vector3(0f, 1.6f, 73.3f), new Vector3(3f, 2.4f, 0.4f), seq04,
-                prompt: "[E] Touch the marked wall", flash: true);
+                prompt: "[E/F] Touch the marked wall", flash: true);
 
             Prop("Artifact", new Vector3(0f, 0.7f, 68f), new Vector3(0.6f, 0.6f, 0.6f), seq05,
-                prompt: "[E] Take the artifact",
+                prompt: "[E/F] Take the artifact",
                 finaleCaption: "Kai wakes up on a beach.\n(SEQ 06 — CEBU, 1521 — next in the Chapter 1 build)");
 
             // ---------- 6) Save ----------
@@ -149,9 +149,9 @@ namespace Bayani.EditorTools
             Debug.Log($"[BAYANI] Phase 2 prologue built → {ScenePath}. Press Play: read the book, then follow the road.");
             EditorUtility.DisplayDialog("2187 Prologue ready",
                 "SEQ 01–05 playable:\n\n" +
-                "1. [E] the family book (SEQ 01)\n2. walk to the door (SEQ 02)\n" +
+                "1. [E/F] the family book (SEQ 01)\n2. walk to the door (SEQ 02)\n" +
                 "3. run the road (SEQ 03)\n4. in the ruins: touch the wall + take the artifact (SEQ 04–05)\n\n" +
-                "Dialogue advances with E / Enter / gamepad A.\nAll lines are verbatim storyline.md.", "OK");
+                "Dialogue advances with E / F / Enter / gamepad A.\nAll lines are verbatim storyline.md.", "OK");
         }
 
         // ---------- helpers ----------

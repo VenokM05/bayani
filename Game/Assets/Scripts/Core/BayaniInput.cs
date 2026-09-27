@@ -70,12 +70,13 @@ namespace Bayani.Core
             (Gamepad.current?.buttonWest.isPressed ?? false);
 
         public static bool SkillPressed =>
-            (Keyboard.current?.dKey.wasPressedThisFrame ?? false) ||
+            (Keyboard.current?.qKey.wasPressedThisFrame ?? false) ||   // was dKey — bug: D is strafe-right
             (Gamepad.current?.buttonNorth.wasPressedThisFrame ?? false);
 
-        // Interact / dialogue advance: E / Enter / gamepad A (story sequences, no combat use).
+        // Interact / pick up / dialogue advance: E or F / Enter / gamepad A (no combat use).
         public static bool InteractPressed =>
             (Keyboard.current?.eKey.wasPressedThisFrame ?? false) ||
+            (Keyboard.current?.fKey.wasPressedThisFrame ?? false) ||
             (Keyboard.current?.enterKey.wasPressedThisFrame ?? false) ||
             (Gamepad.current?.buttonSouth.wasPressedThisFrame ?? false);
 

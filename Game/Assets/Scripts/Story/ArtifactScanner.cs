@@ -1,4 +1,4 @@
-// BAYANI — Artifact scan interaction (phasing 2.2): approach → [E] → TALA scan panel
+// BAYANI — Artifact scan interaction (phasing 2.2): approach → [E/F] → TALA scan panel
 // (name, historical_status badge, read-out) → grants Diwa / Stability / XP from the
 // ArtifactData SO. One scan per artifact, ever. Graybox IMGUI like the dialogue box;
 // the real scan VFX + codex write lands with the 2.3 codex UI.
@@ -12,7 +12,7 @@ namespace Bayani.Story
     public class ArtifactScanner : MonoBehaviour
     {
         public ArtifactData data;
-        public string prompt = "[E] Scan artifact";
+        public string prompt = "[E/F] Scan artifact";
 
         private bool _scanned;
         private bool _panelOpen;
