@@ -18,6 +18,12 @@ namespace Bayani.Story
         public string finaleCaption;        // if set: after dialogue, fade to black and hold this text
         public Bayani.Enemy.WaveSpawner spawnOnFinish;   // story-sequenced fight (Mactan shrine clear)
 
+        [Header("Rewards (PRD §9)")]
+        [Tooltip("Item granted to the inventory when this beat finishes (null = none).")]
+        public Bayani.Player.ItemData grantItem;
+        [Tooltip("Quest guide id — completing this beat marks that quest Complete; with dialogue.autoTrack it also adds the objective.")]
+        public string questId = "";
+
         private bool _done;
         private bool _inside;
 
@@ -73,6 +79,15 @@ namespace Bayani.Story
                 // objective completion pays XP (ggd §56.4 quests 250–800) — 0 on old assets
                 if (dialogue.xpReward > 0)
                     Bayani.Combat.PlayerProgression.Instance?.AwardXp(dialogue.xpReward, dialogue.name);
+                // item grant (PRD §9 skeleton): the container state is static — no host needed
+                if (grantItem != null)
+                    Bayani.Player.Inventory.Add(grantItem);
+                // quest guide (PRD §9): autoTrack adds the objective; questId closes a DIFFERENT beat
+                string opened = null;
+                if (dialogue.autoTrack && !string.IsNullOrEmpty(dialogue.objectiveText))
+                    opened = Bayani.Story.QuestGuide.QuestJournal.AutoAdd(dialogue, questId);
+                if (!string.IsNullOrEmpty(questId) && questId != opened)
+                    Bayani.Story.QuestGuide.QuestJournal.Complete(questId);
                 if (spawnOnFinish != null) spawnOnFinish.Begin();
             }
         }

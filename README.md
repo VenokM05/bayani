@@ -38,11 +38,12 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 | SEQ 01–05 Prologue (2187 archive, first Diwa) | `SC_01_Prologue` | committed `5705ede` |
 | SEQ 06–08 + 07B Cebu 1521 (arrival, people, court) | `SC_03_Cebu` | committed `9baaeb7` — user-verified |
 | SEQ 09–10 Mactan village (Lapu-Lapu, shrine, fire circle) | `SC_04_Mactan` | committed `4f84fc0` |
-| SEQ 10B Corrupted Anito cave (expel-not-kill mini-boss) | `SC_04_Mactan` east | committed `0638ae0`; boss-damage probe awaiting console report |
+| SEQ 10B Corrupted Anito cave (expel-not-kill mini-boss) | `SC_04_Mactan` east | committed `0638ae0` — user-verified: bar drains, expel phase works ("no damage" was the can't-kill-it design) |
+| SEQ 11 Battle of Mactan + Memory Devourer (three seam cycles) | `SC_04_Mactan` west | **built + playtested ✓** — Tools → BAYANI → Phase 2 The Battle; seam cycles + expulsion work (user-verified) |
 
-**Systems since then:** Memory Stability zones (§56.3) · story-triggered waves · dialogue/artifact/kill XP economy · **progression layer** (`0638ae0`, `bf5b683`): L1→L10 = 5,000 XP per §56.4, 8 arnis skills as data SOs on armed/unarmed bars (1–5, G swap), death → YOU DIED → checkpoint respawn with zero loss, overhead + dedicated boss health bars — spec'd in [`docs/prd-progression.md`](docs/prd-progression.md).
+**Systems since then:** Memory Stability zones (§56.3) · story-triggered waves · dialogue/artifact/kill XP economy · **progression layer** (`0638ae0`, `bf5b683`): L1→L10 = 5,000 XP per §56.4, 8 arnis skills as data SOs on armed/unarmed bars (1–5, G swap), death → YOU DIED → checkpoint respawn with zero loss, overhead + dedicated boss health bars — spec'd in [`docs/prd-progression.md`](docs/prd-progression.md). **Phase-2 skeleton systems (uncommitted, awaiting playtest):** level-scaled auto-heal · `ItemData`/`Inventory` (graybox HUD strip, grants via story/scan/drop, local JSON per §46) · I-key stat-upgrade menu (Max HP / Stamina Regen / Diwa Capacity for skill points) · `QuestData`/`QuestJournal` sidebar quest guide — all Inspector-tunable, spec'd in `prd-progression.md §9`, registered ggd §56.1 #14.
 
-**Still ahead:** SEQ 11 Battle of Mactan + Memory Devourer → SEQ 12–13 return/consequence → Mixamo rig + real skill animations → playtest verdicts (10B boss, Mactan pacing, arena FPS). Local commits only; pushes are manual.
+**Still ahead:** SEQ 12–13 return/consequence → Mixamo rig + real skill animations → playtest verdicts (four new systems, Mactan pacing, arena FPS). Local commits only; pushes are manual.
 
 ## Repository Layout
 

@@ -17,6 +17,14 @@ namespace Bayani.Combat
         public static int SkillPoints;
         public static string Toast;                     // one-shot HUD message
 
+        // Stat upgrades (docs/prd-progression.md §9): purchased LEVELS and the
+        // resulting BONUS TOTALS. Totals are what gets re-applied on Awake after
+        // a scene load — the serialized base on CombatResources resets each load,
+        // so the menu only has to spend points once per run.
+        public static int StatLevelMaxHP, StatLevelStamina, StatLevelDiwa;
+        public static float StatBonusHP, StatBonusStaminaRegen, StatBonusDiwa;
+        public static float ItemBonusHP, ItemBonusStaminaRegen;   // item modifiers ride the same re-apply
+
         // checkpoint: last visited Checkpoint (or spawn) — respawn point per PRD §2
         public static string CheckpointScene = "";
         public static Vector3 CheckpointPosition;
@@ -47,15 +55,29 @@ namespace Bayani.Combat
             Instance = this;
             if (resources != null)
             {
-                // re-apply grown stats after scene reload (serialized base + stored levels)
+                // re-apply grown stats after scene reload (serialized base + stored levels + stat menu)
                 int grown = ProgressStore.Level - 1;
                 if (table != null && grown > 0)
                 {
                     resources.GrowMaxHP(table.hpPerLevel * grown);
-                    resources.SetStaminaRegen(table.baseStaminaRegen + table.staminaRegenPerLevel * grown);
                 }
+                if (ProgressStore.StatBonusHP + ProgressStore.ItemBonusHP > 0f)
+                    resources.GrowMaxHP(ProgressStore.StatBonusHP + ProgressStore.ItemBonusHP);
+                if (ProgressStore.StatBonusDiwa > 0f) resources.GrowMaxDiwa(ProgressStore.StatBonusDiwa);
+                RefreshStaminaRegen();
             }
             if (combat != null) combat.OnKill += HandleKill;
+        }
+
+        /// <summary>The ONE stamina-regen formula: table base + level term + stat-menu term + item term.
+        /// Level-ups, stat purchases and item pickups all land here — no caller re-derives it.</summary>
+        public void RefreshStaminaRegen()
+        {
+            if (resources == null) return;
+            float regen = 25f;   // CombatResources serialized default, sane fallback
+            if (table != null)
+                regen = table.baseStaminaRegen + table.staminaRegenPerLevel * (ProgressStore.Level - 1);
+            resources.SetStaminaRegen(regen + ProgressStore.StatBonusStaminaRegen + ProgressStore.ItemBonusStaminaRegen);
         }
 
         private void OnDestroy()
@@ -81,7 +103,7 @@ namespace Bayani.Combat
                 levels++;
                 if (table.grantSkillPointPerLevel) ProgressStore.SkillPoints++;
                 resources?.GrowMaxHP(table.hpPerLevel);
-                resources?.SetStaminaRegen(table.baseStaminaRegen + table.staminaRegenPerLevel * (ProgressStore.Level - 1));
+                RefreshStaminaRegen();
             }
             if (levels > 0)
             {

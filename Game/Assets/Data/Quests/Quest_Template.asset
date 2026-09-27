@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efce7301503041c4782533543f9ec205, type: 3}
+  m_Name: Quest_Template
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.QuestGuide.QuestData
+  questId: template_not_wired
+  title: Sample Quest
+  objectiveText: 'Copy this asset: one SO = one tracked objective with rewards.'
+  completionCondition: 0
+  target: 
+  targetCount: 1
+  rewardXp: 300
+  rewardDiwa: 15

@@ -14,6 +14,9 @@ namespace Bayani.Story
         public ArtifactData data;
         public string prompt = "[E/F] Scan artifact";
 
+        [Tooltip("Item granted to the inventory on scan (PRD §9 — null = none).")]
+        public Bayani.Player.ItemData grantItem;
+
         private bool _scanned;
         private bool _panelOpen;
         private bool _inside;
@@ -58,6 +61,9 @@ namespace Bayani.Story
             // XP ledger now exists (PlayerProgression) — artifact award = §56.4's 50
             if (data.xpReward > 0f)
                 FindFirstObjectByType<Bayani.Combat.PlayerProgression>()?.AwardXp(data.xpReward, data.displayName);
+            // inventory + quest hooks (PRD §9)
+            if (grantItem != null) Bayani.Player.Inventory.Add(grantItem);
+            Bayani.Story.QuestGuide.QuestJournal.OnArtifactScanned(data.codexCategory);
             Debug.Log($"[BAYANI] ARTIFACT SCAN '{data.displayName}' [{data.historicalStatus}] → +{data.diwaReward:0} Diwa, +{data.stabilityReward:0} stability, +{data.xpReward:0} XP — codex {data.codexCategory} entry queued");
 
             _player = FindFirstObjectByType<PlayerController>();

@@ -123,13 +123,61 @@ import → the parameters above light up with zero code changes.
 
 `Tools → BAYANI → Install Progression + Skills` (idempotent, run after any scene
 rebuild): authors `XpTable_Slice` + the 8 skill SOs + quest XP on every
-`DLG_SEQ*` asset, then patches **every scene containing a Kai with combat**
-(prototype, arena, prologue, Cebu, Mactan + cave) with PlayerProgression,
-PlayerSkills, DeathManager and `Checkpoint_Spawn`.
+`DLG_SEQ*` asset + the §9 skeleton data (2 ItemData SOs, a QuestData template),
+then patches **every scene containing a Kai with combat** (prototype, arena,
+prologue, Cebu, Mactan + cave) with PlayerProgression, PlayerSkills, DeathManager,
+`Checkpoint_Spawn`, and the §9 hosts: PlayerAutoHeal + StatUpgradeMenu on the
+story host, one `InventoryHost` per scene.
 
 ## 8. Explicit non-scope (this pass)
 
-Inventory/equipment and crafting (Phase 3.4), the 15-node passive tree UI that
-spends banked skill points (Phase 3.6), real scan/attack VFX and audio
-(Tier-2 art), multiplayer-grade death telemetry, and any change to §56.2/§56.3
-resource semantics — Stamina and Diwa keep their established definitions.
+Crafting and equipment slots on top of the §9 inventory skeleton (Phase 3.4), the
+15-node passive tree UI that spends banked skill points (Phase 3.6), real
+scan/attack VFX and audio (Tier-2 art), multiplayer-grade death telemetry, and any
+change to §56.2/§56.3 resource semantics — Stamina and Diwa keep their established
+definitions.
+
+## 9. Phase 2 skeleton systems (Inspector-tunable)
+
+Four lightweight systems, all data-driven via ScriptableObjects. Every value lives
+on a component or SO — no tuning requires code. All components follow the
+`ProgressStore` survival trick (static state rides through `LoadScene`); the
+installer patches their hosts onto every playable scene.
+
+### 9.1 Auto-heal — `PlayerAutoHeal` (story host)
+Ticks every `tickSeconds` (default **1.5 s**) and heals a flat amount while HP is
+below max and the player is alive: `heal = min(maxHeal, baseHeal + (Level-1)/3 * healPerThreeLevels)`
+— i.e. **+2 HP/tick at L1, +1 more per 3 levels, capped at +8**. Diwa and Stamina
+pools are untouched (§56.2 non-overlap); every point routes through the new
+`CombatResources.Heal(amount)` which clamps to maxHP and fires
+`OnResourceChanged("hp", Δ)`.
+
+### 9.2 Inventory — `ItemData` SO + `Inventory` (DontDestroyOnLoad host)
+`ItemData` (CreateAssetMenu **BAYANI/Item Data**): itemName, icon (Sprite, optional
+while graybox), description, stackable, maxStack, hpBonus, staminaBonus. `Inventory`
+holds a `List<ItemData>` of stacks (parallel counts); grants come from
+`StoryTrigger.grantItem`, `ArtifactScanner.grantItem`, or enemy drops
+(`EnemyData.dropItem` + `dropChance`, **0 = off**, opt-in per enemy). Stat bonuses
+apply **once** on first pickup (hp → `GrowMaxHP`, stamina → the central regen formula).
+State is static so it survives death and scene loads; a local JSON file
+(`Application.persistentDataPath/bayani_inventory.json`, ggd §46 — no backend) is
+written on every change and can be restored through a catalog. 8 graybox slots render
+under the skill bar with icon/initial tile, stack count, and a hover tooltip.
+
+### 9.3 Stat upgrade menu — `StatUpgradeMenu` (story host, key **I** / Tab / Start)
+Overlay listing three upgradable stats — **Max HP (+10/lvl), Stamina Regen (+2/lvl),
+Diwa Capacity (+10/lvl)**. Buying level *N* costs *N* skill points (linear, `costPerLevel`
+multiplier); each purchase banks the level **and** the bonus total in `ProgressStore`
+and applies immediately via `GrowMaxHP` / `RefreshStaminaRegen` / `GrowMaxDiwa`, then
+re-applies on `Awake` after any reload. The menu is locked until **Lvl 2** (first skill
+point); overspending shows the "No skill points remaining" toast.
+
+### 9.4 Quest guide — `QuestData` SO + `QuestJournal` (static)
+`DialogueAsset` gains `objectiveText` + `autoTrack`; when a `StoryTrigger` finishes a
+sequence with `autoTrack`, the objective is added to a persistent sidebar
+(top-right, under the FPS readout) as `[text] — Active/Complete`. `QuestData`
+(CreateAssetMenu **BAYANI/Quest Data**) is the reward-bearing template: questId,
+title, objectiveText, rewardXp, rewardDiwa, and a `completionCondition` enum
+(**DialogueFinished / ArtifactScanned / EnemyKilledCount**). A later `StoryTrigger.questId`
+marks it Complete (never the same beat that opened it); kills and scans advance the
+counter conditions. No branching trees, no timers — sequential Phase 2 tracking only.

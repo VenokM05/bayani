@@ -31,6 +31,10 @@ namespace Bayani.Enemy
         public float xpOnKill = 40f;           // Phase 2 XP hooks in; stored now
         public float stabilityOnKill = 5f;     // +5 Memory Stability (ggd §56.3)
 
+        [Header("Drop (PRD §9 — inventory skeleton)")]
+        public Bayani.Player.ItemData dropItem;        // null = no drop
+        [Range(0f, 1f)] public float dropChance = 0f;  // 0 = off by default (opt-in per enemy)
+
         [Header("Ranged only")]
         public float projectileSpeed = 11f;
     }

@@ -20,5 +20,11 @@ namespace Bayani.Story
 
         [Tooltip("Quest/objective XP granted when a StoryTrigger finishes this sequence (ggd §56.4: quests 250–800; 0 = none).")]
         public int xpReward;
+
+        [Header("Quest guide (docs/prd-progression.md §9)")]
+        [Tooltip("Shown in the quest sidebar when autoTrack is on — e.g. 'Find the cause of the tremors'.")]
+        public string objectiveText = "";
+        [Tooltip("Adds objectiveText to the quest guide when this sequence finishes.")]
+        public bool autoTrack;
     }
 }

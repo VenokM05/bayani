@@ -25,3 +25,5 @@ MonoBehaviour:
   - speaker: NARRATION
     text: It answers by coming.
   xpReward: 250
+  objectiveText: Find what is eating the nest under the shore
+  autoTrack: 1

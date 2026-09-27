@@ -78,6 +78,24 @@ namespace Bayani.Combat
             OnResourceChanged?.Invoke("hp", delta);
         }
 
+        /// <summary>Flat heal, clamped to maxHP, dead players don't mend (auto-heal + consumables route here).</summary>
+        public void Heal(float amount)
+        {
+            if (amount <= 0f || IsDead || HP >= maxHP) return;
+            float before = HP;
+            HP = Mathf.Min(maxHP, HP + amount);
+            OnResourceChanged?.Invoke("hp", HP - before);
+        }
+
+        /// <summary>Permanent Diwa-cap growth (stat upgrades) — the earned meter gets a bigger bucket.</summary>
+        public void GrowMaxDiwa(float delta)
+        {
+            maxDiwa = Mathf.Max(1f, maxDiwa + delta);
+            Diwa = Mathf.Min(maxDiwa, Diwa + Mathf.Max(0f, delta));
+            OnResourceChanged?.Invoke("diwa", delta);
+        }
+
+        public float StaminaRegenPerSec => staminaRegenPerSec;
         public void SetStaminaRegen(float perSec) => staminaRegenPerSec = Mathf.Max(0f, perSec);
 
         /// <summary>Respawn / level-up restore: full HP + stamina, Diwa untouched (earned meter).</summary>

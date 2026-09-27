@@ -97,6 +97,13 @@ namespace Bayani.Core
         public static bool WeaponTogglePressed =>
             (Keyboard.current?.gKey.wasPressedThisFrame ?? false);
 
+        // Stat upgrade menu (docs/prd-progression.md §9): I / Tab, gamepad Start.
+        // (Verified: base Gamepad has startButton/selectButton only — no openMenu property.)
+        public static bool MenuPressed =>
+            (Keyboard.current?.iKey.wasPressedThisFrame ?? false) ||
+            (Keyboard.current?.tabKey.wasPressedThisFrame ?? false) ||
+            (Gamepad.current?.startButton.wasPressedThisFrame ?? false);
+
         // Interact / pick up / dialogue advance: E or F / Enter / gamepad A (no combat use).
         public static bool InteractPressed =>
             (Keyboard.current?.eKey.wasPressedThisFrame ?? false) ||

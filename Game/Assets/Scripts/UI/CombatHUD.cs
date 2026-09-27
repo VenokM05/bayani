@@ -111,15 +111,83 @@ namespace Bayani.UI
             }
 
             SkillBar();
+            ItemRow();                                                        // PRD §9 — slots under the skill bar
+            Bayani.Story.QuestGuide.QuestJournal.Draw();                      // PRD §9 — top-right sidebar
             OverheadBars();
 
-            GUI.Label(new Rect(20f, Screen.height - 30f, 900f, 24f),
-                "ATTACK LMB · BLOCK RMB (timed = PARRY) · DODGE LCtrl · BURST Q · SKILLS 1–5 (swap armed/unarmed G) · INTERACT E/F");
+            // control hints — moved out of the bottom strip, which the item row owns now
+            var hints = new GUIStyle(GUI.skin.label) { fontSize = 12 };
+            hints.normal.textColor = new Color(1f, 1f, 1f, 0.45f);
+            GUI.Label(new Rect(20f, stateY + 24f, 640f, 18f),
+                "ATTACK LMB · BLOCK RMB (timed = PARRY) · DODGE LCtrl · BURST Q · SKILLS 1–5 (G swap) · STATS I · INTERACT E/F", hints);
 
             // FPS, top-right: green ≥55 · yellow ≥40 · red below (60 FPS gate check)
             var fs = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperRight, fontSize = 16, fontStyle = FontStyle.Bold };
             fs.normal.textColor = _fps >= 55f ? new Color(0.4f, 0.9f, 0.45f) : _fps >= 40f ? Color.yellow : Color.red;
             GUI.Label(new Rect(Screen.width - 160f, 14f, 145f, 22f), $"{_fps:F0} FPS", fs);
+        }
+
+        // ---- §9: inventory strip — 8 graybox slots under the skill bar, hover = tooltip ----
+        private void ItemRow()
+        {
+            var items = Bayani.Player.Inventory.Items;
+            const float sz = 30f, gap = 6f;
+            int slots = Bayani.Player.Inventory.SlotCount;
+            float x0 = Screen.width * 0.5f - (slots * (sz + gap) - gap) * 0.5f;
+            float y0 = Screen.height - 40f;
+
+            var mouse = UnityEngine.InputSystem.Mouse.current;
+            Vector2 mp = mouse != null ? mouse.position.ReadValue() : new Vector2(-9999, -9999);
+            int hover = -1;
+
+            var letter = new GUIStyle(GUI.skin.label) { fontSize = 14, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
+            letter.normal.textColor = new Color(0.9f, 0.85f, 0.7f);
+            var count = new GUIStyle(GUI.skin.label) { fontSize = 11, fontStyle = FontStyle.Bold, alignment = TextAnchor.LowerRight };
+            count.normal.textColor = Color.white;
+
+            for (int i = 0; i < slots; i++)
+            {
+                var r = new Rect(x0 + i * (sz + gap), y0, sz, sz);
+                GUI.color = new Color(0.07f, 0.09f, 0.13f, 0.85f);
+                GUI.DrawTexture(r, Texture2D.whiteTexture);
+                GUI.color = new Color(0.35f, 0.42f, 0.55f, 0.7f);
+                GUI.DrawTexture(new Rect(r.x, r.y, r.width, 1f), Texture2D.whiteTexture);
+                GUI.DrawTexture(new Rect(r.x, r.yMax - 1f, r.width, 1f), Texture2D.whiteTexture);
+                GUI.DrawTexture(new Rect(r.x, r.y, 1f, r.height), Texture2D.whiteTexture);
+                GUI.DrawTexture(new Rect(r.xMax - 1f, r.y, 1f, r.height), Texture2D.whiteTexture);
+                GUI.color = Color.white;
+
+                if (i >= items.Count || items[i] == null) continue;
+                var it = items[i];
+                if (it.icon != null)
+                    GUI.DrawTexture(new Rect(r.x + 3f, r.y + 3f, sz - 6f, sz - 6f), it.icon.texture, ScaleMode.ScaleToFit);
+                else if (!string.IsNullOrEmpty(it.itemName))
+                    GUI.Label(r, it.itemName.Substring(0, 1).ToUpper(), letter);   // graybox: initial tile
+                int n = Bayani.Player.Inventory.CountAt(i);
+                if (n > 1) GUI.Label(r, n.ToString(), count);
+                if (r.Contains(mp)) hover = i;
+            }
+
+            if (hover < 0) return;
+            var tip = items[hover];
+            string bonus = "";
+            if (tip.hpBonus != 0f) bonus += $"  ·  +{tip.hpBonus:0} MAX HP";
+            if (tip.staminaBonus != 0f) bonus += $"  ·  +{tip.staminaBonus:0}/s REGEN";
+            float tw = 300f;
+            float th = 34f + (string.IsNullOrEmpty(tip.description) ? 0f : 30f);
+            var tr = new Rect(Mathf.Clamp(x0 + hover * (sz + gap) - 60f, 8f, Screen.width - tw - 8f), y0 - th - 6f, tw, th);
+            GUI.color = new Color(0.04f, 0.05f, 0.08f, 0.95f);
+            GUI.DrawTexture(tr, Texture2D.whiteTexture);
+            GUI.color = Color.white;
+            var tn = new GUIStyle(GUI.skin.label) { fontSize = 14, fontStyle = FontStyle.Bold };
+            tn.normal.textColor = new Color(0.92f, 0.72f, 0.25f);
+            GUI.Label(new Rect(tr.x + 10f, tr.y + 6f, tw - 20f, 18f), tip.itemName + bonus, tn);
+            if (!string.IsNullOrEmpty(tip.description))
+            {
+                var td = new GUIStyle(GUI.skin.label) { fontSize = 12, wordWrap = true };
+                td.normal.textColor = new Color(0.85f, 0.85f, 0.9f);
+                GUI.Label(new Rect(tr.x + 10f, tr.y + 26f, tw - 20f, th - 30f), tip.description, td);
+            }
         }
 
         // ---- §6: 5-slot skill bar with cooldown indicators ----

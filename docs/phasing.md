@@ -90,7 +90,7 @@ Total realistic calendar to a showable slice: **~5–7 months part-time** (draft
 
 | # | Step |
 |---|------|
-| 2.1 | Quest system skeleton (`QuestData` SO + objectives, per blueprints §41 field shape — stored in SO, NOT backend) |
+| 2.1 | Quest system skeleton (`QuestData` SO + objectives, per blueprints §41 field shape — stored in SO, NOT backend) — ✅ SKELETON BUILT (`prd-progression.md §9.4`: `QuestData` SO + static `QuestJournal` + HUD sidebar; sequential only, no branches/timers) |
 | 2.2 | Artifact scan interaction: approach → prompt → TALA scan panel → codex entry (+15 Diwa per §56.2) |
 | 2.3 | Codex UI with the 7 canonical tabs + `historical_status` badges (ggd §51/§25) |
 | 2.4 | Memory Stability v1 per §56.3 (zone score, desaturation/fog gradient, spawn scaling) |
@@ -99,6 +99,13 @@ Total realistic calendar to a showable slice: **~5–7 months part-time** (draft
 | 2.7 | Dialogue system v1: on-screen speaker + [Continue] (ggd §37), TALA voice via SO-driven lines — ✅ DELIVERED early in the 2187 prologue (`Bayani.Story`, commit `5705ede`) |
 | 2.8 | Local save/load (JSON: player state, quests, codex, stability) — §46 Local Save only |
 | 2.9 | **Assemble the core §47 5-minute sequence**: jungle walk → duwende → Limot → fight → artifact → scan → hidden path → Kapre silhouette → cut |
+
+**Build state (2026-09-27):** the Phase-2 *systems* skeletons exist — auto-heal,
+inventory (`ItemData` SO + static container + graybox HUD strip), the I-key stat
+menu and the quest guide (`prd-progression.md §9`, registered ggd §56.1 #14), all
+installed by `Tools → BAYANI → Install Progression + Skills` and all Inspector-tunable.
+2.2–2.4 shipped earlier with the Mactan slice; 2.5–2.6/2.9 content and the 2.8
+full-save (quests/codex/stability) are still open.
 
 **Exit gate:**
 - [ ] The 5-minute sequence plays start→finish without a single hard-coded reference

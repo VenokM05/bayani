@@ -739,138 +739,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &167497512
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 229832293}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 100.048225
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 100.048225
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100.048225
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0069488506
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.001748085
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      propertyPath: m_Name
-      value: kai_model
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 167497515}
-  m_SourcePrefab: {fileID: 100100000, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
---- !u!4 &167497513 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-  m_PrefabInstance: {fileID: 167497512}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &167497514 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
-  m_PrefabInstance: {fileID: 167497512}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &167497515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167497514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a03ead401adec44a9d8861bbd2d082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.KaiWalkBob
-  bobHeight: 0.05
-  bobFrequency: 9
-  swayAngle: 3.5
-  leanAngle: 6
-  idleBreathSpeed: 1.6
-  smoothing: 10
---- !u!1 &229832292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 229832293}
-  m_Layer: 0
-  m_Name: Visual
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &229832293
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229832292}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 167497513}
-  m_Father: {fileID: 476401859}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245132423
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +853,106 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &287307451
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 759958231}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100.048225
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100.048225
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100.048225
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0069488506
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.001748085
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      propertyPath: m_Name
+      value: kai_model
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 287307454}
+  m_SourcePrefab: {fileID: 100100000, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+--- !u!4 &287307452 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+  m_PrefabInstance: {fileID: 287307451}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &287307453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2320deeaebc452843aa57ebd416c00e7, type: 3}
+  m_PrefabInstance: {fileID: 287307451}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &287307454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287307453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a03ead401adec44a9d8861bbd2d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.KaiWalkBob
+  bobHeight: 0.05
+  bobFrequency: 9
+  swayAngle: 3.5
+  leanAngle: 6
+  idleBreathSpeed: 1.6
+  smoothing: 10
 --- !u!1 &290139449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1061,50 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: 40}
   m_LocalScale: {x: 1, y: 0.6, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &320988188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320988190}
+  - component: {fileID: 320988189}
+  m_Layer: 0
+  m_Name: InventoryHost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &320988189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320988188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b456c4b026b3a2e4c855646c4b73671e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.Inventory
+--- !u!4 &320988190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320988188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1433,7 +1445,7 @@ MonoBehaviour:
   jumpHeight: 1
   lookCamera: {fileID: 1742075625}
   mouseSensitivity: 0.1
-  visual: {fileID: 229832293}
+  visual: {fileID: 759958231}
   ControlsEnabled: 1
 --- !u!143 &476401856
 CharacterController:
@@ -1531,7 +1543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1416018519}
-  - {fileID: 229832293}
+  - {fileID: 759958231}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &476401860
@@ -1802,6 +1814,8 @@ MonoBehaviour:
   flashOnStart: 0
   finaleCaption: 
   spawnOnFinish: {fileID: 0}
+  grantItem: {fileID: 0}
+  questId: 
 --- !u!65 &722783489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1837,6 +1851,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &759958230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 759958231}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &759958231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759958230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 287307452}
+  m_Father: {fileID: 476401859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &801650291
 GameObject:
@@ -2935,6 +2981,8 @@ GameObject:
   - component: {fileID: 1497442392}
   - component: {fileID: 1497442391}
   - component: {fileID: 1497442394}
+  - component: {fileID: 1497442396}
+  - component: {fileID: 1497442395}
   m_Layer: 0
   m_Name: Story (DialoguePlayer + ScreenFader)
   m_TagString: Untagged
@@ -2995,6 +3043,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.DeathManager
   deathHold: 2.5
   mercyInvuln: 2
+--- !u!114 &1497442395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497442390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b9c6f1c5511584dbddbafb1bd24704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.StatUpgradeMenu
+  resources: {fileID: 476401854}
+  progression: {fileID: 476401861}
+  hpPerLevel: 10
+  staminaRegenPerLevel: 2
+  diwaPerLevel: 10
+  maxStatLevel: 5
+  costPerLevel: 1
+--- !u!114 &1497442396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497442390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf78735f32f744f4fbfb2ac2be904fbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.PlayerAutoHeal
+  resources: {fileID: 476401854}
+  tickSeconds: 1.5
+  baseHeal: 2
+  healPerThreeLevels: 1
+  maxHeal: 8
 --- !u!1 &1546660072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3032,6 +3116,8 @@ MonoBehaviour:
   flashOnStart: 0
   finaleCaption: 
   spawnOnFinish: {fileID: 0}
+  grantItem: {fileID: 0}
+  questId: 
 --- !u!65 &1546660074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3107,6 +3193,8 @@ MonoBehaviour:
   flashOnStart: 0
   finaleCaption: 
   spawnOnFinish: {fileID: 0}
+  grantItem: {fileID: 0}
+  questId: 
 --- !u!23 &1563893611
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4359,3 +4447,4 @@ SceneRoots:
   - {fileID: 245132427}
   - {fileID: 1563893614}
   - {fileID: 1455376658}
+  - {fileID: 320988190}

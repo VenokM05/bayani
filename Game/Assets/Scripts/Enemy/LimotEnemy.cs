@@ -229,6 +229,10 @@ namespace Bayani.Enemy
             _state = State.Dead;
             hitbox?.DeactivateWindow();
             PulseVisual(1f, new Color(0.25f, 0.2f, 0.3f));
+            // Item drop (PRD §9) — opt-in per EnemyData; quest kill-counter hook
+            if (data.dropItem != null && Random.value <= data.dropChance)
+                Bayani.Player.Inventory.Add(data.dropItem);
+            Bayani.Story.QuestGuide.QuestJournal.OnEnemyKilled(data);
             player?.OnKillConfirmed(data);
             // Memory Stability: kill = +stability, and this nest stops draining (ggd §56.3)
             if (_countedAsNest)

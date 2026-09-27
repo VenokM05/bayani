@@ -9,11 +9,15 @@
 //    a Checkpoint at spawn. Re-runnable; run again after rebuilding scenes.
 // 3) Sets quest XP on story dialogue SOs (§56.4: quests 250–800) and repairs
 //    the Anito's XP to the boss band if its asset predates the fix.
+// 4) Authors the skeleton systems' data + components (docs/prd-progression.md §9):
+//    auto-heal + stat menu on the story host, an InventoryHost per scene,
+//    starter ItemData SOs and a QuestData template.
 
 using Bayani.Combat;
 using Bayani.Enemy;
 using Bayani.Player;
 using Bayani.Story;
+using Bayani.Story.QuestGuide;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -24,6 +28,8 @@ namespace Bayani.EditorTools
     {
         private static readonly string SkillDir = "Assets/Data/Skills";
         private static readonly string ProgDir = "Assets/Data/Progression";
+        private static readonly string ItemDir = "Assets/Data/Items";
+        private static readonly string QuestDir = "Assets/Data/Quests";
 
         [MenuItem("Tools/BAYANI/Install Progression + Skills")]
         public static void Install()
@@ -89,6 +95,50 @@ namespace Bayani.EditorTools
             if (anitoData != null && anitoData.xpOnKill < 500f)
             { anitoData.xpOnKill = 500f; EditorUtility.SetDirty(anitoData); }
 
+            // ---------- 1b) skeleton-systems data (PRD §9) ----------
+            var stone = GetOrCreate($"{ItemDir}/Item_RiverStone.asset", () =>
+            {
+                var i = ScriptableObject.CreateInstance<ItemData>();
+                i.name = "Item_RiverStone";
+                return i;
+            });
+            stone.itemName = "River Stone"; stone.stackable = true; stone.maxStack = 5;
+            stone.description = "Smooth from the Guadalupe current. A habit from home — the river has no memory, so it does not forget you either.";
+            EditorUtility.SetDirty(stone);
+
+            var bell = GetOrCreate($"{ItemDir}/Item_ShrineBell.asset", () =>
+            {
+                var i = ScriptableObject.CreateInstance<ItemData>();
+                i.name = "Item_ShrineBell";
+                return i;
+            });
+            bell.itemName = "Shrine Bell"; bell.stackable = false; bell.maxStack = 1;
+            bell.hpBonus = 10f;
+            bell.description = "Tugs once for every name the battle kept. The first thing the cave gave back.";
+            EditorUtility.SetDirty(bell);
+
+            var quest = GetOrCreate($"{QuestDir}/Quest_Template.asset", () =>
+            {
+                var q = ScriptableObject.CreateInstance<QuestData>();
+                q.name = "Quest_Template";
+                return q;
+            });
+            quest.questId = "template_not_wired";   // rename + point a StoryTrigger.questId at it to activate
+            quest.title = "Sample Quest";
+            quest.objectiveText = "Copy this asset: one SO = one tracked objective with rewards.";
+            quest.completionCondition = QuestCondition.DialogueFinished;
+            quest.rewardXp = 300; quest.rewardDiwa = 15;
+            EditorUtility.SetDirty(quest);
+
+            // visible quest-guide demo: the cave's first words open an objective
+            var caveIntro = AssetDatabase.LoadAssetAtPath<DialogueAsset>("Assets/Data/Story/DLG_SEQ10B_Intro.asset");
+            if (caveIntro != null && string.IsNullOrEmpty(caveIntro.objectiveText))
+            {
+                caveIntro.objectiveText = "Find what is eating the nest under the shore";
+                caveIntro.autoTrack = true;
+                EditorUtility.SetDirty(caveIntro);
+            }
+
             // ---------- 2) patch every Kai scene ----------
             string scenesRoot = System.IO.Path.Combine(Application.dataPath, "Scenes");
             int patched = 0;
@@ -123,6 +173,26 @@ namespace Bayani.EditorTools
                 var death = deathTarget.GetComponent<DeathManager>();
                 if (death == null) death = deathTarget.AddComponent<DeathManager>();
 
+                // auto-heal + stat menu ride the same story host (PRD §9)
+                var heal = deathTarget.GetComponent<PlayerAutoHeal>();
+                if (heal == null) heal = deathTarget.AddComponent<PlayerAutoHeal>();
+                heal.resources = res;
+
+                var menu = deathTarget.GetComponent<StatUpgradeMenu>();
+                if (menu == null) menu = deathTarget.AddComponent<StatUpgradeMenu>();
+                menu.resources = res; menu.progression = prog;
+
+                // inventory host — the GO only carries the singleton; state lives in statics
+                GameObject invGo = null;
+                foreach (var go in scene.GetRootGameObjects())
+                    if (go.name == "InventoryHost") { invGo = go; break; }
+                if (invGo == null)
+                {
+                    invGo = new GameObject("InventoryHost");
+                    invGo.transform.position = Vector3.zero;
+                }
+                if (invGo.GetComponent<Inventory>() == null) invGo.AddComponent<Inventory>();
+
                 // spawn checkpoint at Kai's planted position (one per scene, idempotent)
                 GameObject cpGo = null;
                 foreach (var go in scene.GetRootGameObjects())
@@ -143,8 +213,8 @@ namespace Bayani.EditorTools
             AssetDatabase.SaveAssets();
             EditorUtility.DisplayDialog("Progression + Skills",
                 $"Data authored + {patched} scene(s) patched.\n\n" +
-                "1–5 skill slots · G swaps armed/unarmed · Q stays Diwa Burst\n" +
-                "Level curve: L1→L10 = 5,000 XP (§56.4)\n" +
+                "1–5 skill slots · G swaps armed/unarmed · Q stays Diwa Burst · I opens STATS\n" +
+                "Level curve: L1→L10 = 5,000 XP (§56.4) · auto-heal + stat menu + inventory + quest guide installed\n" +
                 "Death → YOU DIED → checkpoint respawn, full HP/stamina, XP kept.\n\n" +
                 "Re-run this after rebuilding any scene.", "OK");
         }
