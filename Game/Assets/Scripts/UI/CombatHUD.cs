@@ -165,15 +165,37 @@ namespace Bayani.UI
                 _skills.Armed ? "ARMED — weapon skills (G: stow)" : "UNARMED — bare hands (G: ready weapon)", mode);
         }
 
-        // ---- §6: overhead enemy health bars (screen-projected) ----
+        // ---- §6: overhead enemy health bars (screen-projected) + boss bar ----
         private void OverheadBars()
         {
             var cam = Camera.main;
             if (cam == null || BattleHealthRegistry.Active.Count == 0) return;
 
             _tmpBars.Clear();
+            IBattleHealth boss = null;
             foreach (var h in BattleHealthRegistry.Active)
-                if (h != null && h.BarVisible && h.HealthFraction < 1f) _tmpBars.Add(h);   // only damaged — clean reads cleaner
+            {
+                if (h == null || !h.BarVisible) continue;
+                if (h.BarAlwaysVisible) { boss = h; continue; }          // big dedicated bar below
+                if (h.HealthFraction < 1f) _tmpBars.Add(h);              // only damaged — clean reads cleaner
+            }
+
+            // Boss bar: top-center, wide, visible from the pull (never lost off the top
+            // of the view like the projected overhead point was on the tall Anito).
+            if (boss != null)
+            {
+                float bw = Mathf.Min(520f, Screen.width * 0.55f), bh = 14f;
+                float bx = Screen.width * 0.5f - bw * 0.5f, by = 46f;
+                var bn = new GUIStyle(GUI.skin.label) { fontSize = 15, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
+                bn.normal.textColor = new Color(1f, 0.82f, 0.85f);
+                GUI.Label(new Rect(bx - 60f, by - 22f, bw + 120f, 20f), boss.BarName.ToUpper(), bn);
+                GUI.color = new Color(0f, 0f, 0f, 0.7f);
+                GUI.DrawTexture(new Rect(bx - 2f, by - 2f, bw + 4f, bh + 4f), Texture2D.whiteTexture);
+                GUI.color = new Color(0.62f, 0.16f, 0.22f);
+                GUI.DrawTexture(new Rect(bx, by, bw * Mathf.Clamp01(boss.HealthFraction), bh), Texture2D.whiteTexture);
+                GUI.color = Color.white;
+            }
+
             if (_tmpBars.Count == 0) return;
 
             var name = new GUIStyle(GUI.skin.label) { fontSize = 11, alignment = TextAnchor.MiddleCenter };
@@ -187,7 +209,9 @@ namespace Bayani.UI
                 Vector3 s = cam.WorldToScreenPoint(head);
                 if (s.z <= 0f) continue;                                     // behind camera
                 float bw = 80f, bh = 6f;
-                var r = new Rect(s.x - bw * 0.5f, Screen.height - s.y - 14f, bw, bh);
+                // clamp into view so a bar on a tall enemy can't slide off the top edge
+                float sy = Mathf.Clamp(Screen.height - s.y - 14f, 4f, Screen.height - 24f);
+                var r = new Rect(s.x - bw * 0.5f, sy, bw, bh);
                 GUI.color = new Color(0f, 0f, 0f, 0.6f);
                 GUI.DrawTexture(new Rect(r.x - 1f, r.y - 1f, r.width + 2f, r.height + 2f), Texture2D.whiteTexture);
                 GUI.color = new Color(0.85f, 0.22f, 0.2f);

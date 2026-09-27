@@ -49,6 +49,7 @@ namespace Bayani.Enemy
         public string BarName => data.enemyName;
         public Vector3 HeadPoint => transform.position + Vector3.up * (2f * transform.localScale.y);
         public bool BarVisible => !IsDead;
+        public bool BarAlwaysVisible => false;   // regular enemy: small projected bar only when damaged
 
         private void Awake()
         {

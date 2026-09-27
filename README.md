@@ -25,6 +25,25 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 2. **Vertical slice** — 60–90 min, local save only, **no backend** (ruling: ggd.md §56.6).
 3. Everything else (mobile, web, Laravel cloud features, later eras) comes after the slice proves the game is fun.
 
+## Build Progress (start → today, updated 2026-09-27)
+
+**P0 — Foundation.** Repo + docs reconciliation (ggd §56), Unity 6 (URP, 6000.3.10f1) project in `Game/`, content data layer under `content/`.
+
+**P1 — Combat core (all exit gates passed).** Camera-relative controller, Hitbox/Hurtbox damage pipeline, combo/block/parry + Bantay auto-parry tutorial, graybox HUD with FPS readout, one-click arena builders incl. 6-wave spawner. Playtest verdicts: decisions ✓ · parry ✓ · Bantay ✓. *Open: the wave-arena 60 FPS number is still unreported.*
+
+**P2 — Chapter 1 story slices, graybox-playable:**
+
+| Beat | Scene | Landed |
+|---|---|---|
+| SEQ 01–05 Prologue (2187 archive, first Diwa) | `SC_01_Prologue` | committed `5705ede` |
+| SEQ 06–08 + 07B Cebu 1521 (arrival, people, court) | `SC_03_Cebu` | committed `9baaeb7` — user-verified |
+| SEQ 09–10 Mactan village (Lapu-Lapu, shrine, fire circle) | `SC_04_Mactan` | committed `4f84fc0` |
+| SEQ 10B Corrupted Anito cave (expel-not-kill mini-boss) | `SC_04_Mactan` east | committed `0638ae0`; boss-damage probe awaiting console report |
+
+**Systems since then:** Memory Stability zones (§56.3) · story-triggered waves · dialogue/artifact/kill XP economy · **progression layer** (`0638ae0`, `bf5b683`): L1→L10 = 5,000 XP per §56.4, 8 arnis skills as data SOs on armed/unarmed bars (1–5, G swap), death → YOU DIED → checkpoint respawn with zero loss, overhead + dedicated boss health bars — spec'd in [`docs/prd-progression.md`](docs/prd-progression.md).
+
+**Still ahead:** SEQ 11 Battle of Mactan + Memory Devourer → SEQ 12–13 return/consequence → Mixamo rig + real skill animations → playtest verdicts (10B boss, Mactan pacing, arena FPS). Local commits only; pushes are manual.
+
 ## Repository Layout
 
 ```text

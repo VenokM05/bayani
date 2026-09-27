@@ -14,6 +14,7 @@ namespace Bayani.Combat
         string BarName { get; }
         Vector3 HeadPoint { get; }      // world position above the head for the bar
         bool BarVisible { get; }        // e.g. hide while dormant
+        bool BarAlwaysVisible { get; }  // bosses: big dedicated bar from full HP, no projection
     }
 
     public static class BattleHealthRegistry

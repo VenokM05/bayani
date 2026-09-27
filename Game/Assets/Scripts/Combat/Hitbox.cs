@@ -19,6 +19,7 @@ namespace Bayani.Combat
         public Team team;
 
         private readonly HashSet<Hurtbox> _hitThisWindow = new();
+        private readonly HashSet<Hurtbox> _skipLogged = new();   // 10B diagnostic, once per window
 
         /// <summary>Fires when this swing connects — owner uses it for Diwa gain + hit-stop.</summary>
         public event System.Action<Hurtbox> OnLanded;
@@ -27,6 +28,7 @@ namespace Bayani.Combat
         public void ActivateWindow()
         {
             _hitThisWindow.Clear();
+            _skipLogged.Clear();
             gameObject.SetActive(true);
         }
 
@@ -36,8 +38,18 @@ namespace Bayani.Combat
         private void OnTriggerStay(Collider other)
         {
             var hurt = other.GetComponentInParent<Hurtbox>();
-            if (hurt == null || hurt.IsInvulnerable) return;
-            if (hurt.team == team) return;                 // friendly fire off
+            if (hurt == null) return;
+            // 10B diagnostic: contact exists but a filter drops it — name the filter
+            if (hurt.IsInvulnerable || hurt.team == team) 
+            {
+                if (!_skipLogged.Contains(hurt))
+                {
+                    _skipLogged.Add(hurt);
+                    Debug.Log($"[BAYANI][10B-probe] {name} overlapped {hurt.name} but dropped: " +
+                              $"invuln={hurt.IsInvulnerable} hurtTeam={hurt.team} myTeam={team}");
+                }
+                return;
+            }
             if (_hitThisWindow.Contains(hurt)) return;     // one hit per window per target
 
             _hitThisWindow.Add(hurt);
