@@ -18,7 +18,9 @@ namespace Bayani.Player
         [Header("Movement (arcade feel — ggd §56.8 / phasing 1.1)")]
         [SerializeField] private float walkSpeed = 3.5f;
         [SerializeField] private float runSpeed = 5f;          // ~5 units/s per phasing.md 1.1
-        [SerializeField] private float acceleration = 12f;
+        [SerializeField] private float acceleration = 12f;     // exponential damping, fps-independent
+        [SerializeField] private float turnSpeed = 16f;        // body rotation toward move direction
+        [SerializeField] private float speedBlend = 8f;        // walk↔run ramp — no speed snaps
         [SerializeField] private float gravity = -20f;
         [SerializeField] private float jumpHeight = 1.0f;
 
@@ -29,6 +31,7 @@ namespace Bayani.Player
         private CharacterController _cc;
         private Vector3 _planarVelocity;
         private float _verticalVelocity;
+        private float _speedCur;            // blended walk/run speed (smooth sprint transitions)
         private float _cameraPitch;
         private Bayani.Combat.CombatResources _resources;   // optional: sprint drains stamina (§56.2)
 
@@ -60,21 +63,24 @@ namespace Bayani.Player
                 else _resources.SpendStamina(10f * Time.deltaTime);
             }
             float speed = running ? runSpeed : walkSpeed;
+            // Ramp toward target speed instead of snapping when sprint starts/stops
+            _speedCur = Mathf.Lerp(_speedCur, speed, 1f - Mathf.Exp(-speedBlend * Time.deltaTime));
 
             // Camera-relative movement direction
             float camYaw = lookCamera != null ? lookCamera.transform.eulerAngles.y : transform.eulerAngles.y;
             Quaternion facing = Quaternion.Euler(0f, camYaw, 0f);
             Vector3 desired = facing * new Vector3(move.x, 0f, move.y).normalized;
-            Vector3 targetVel = desired * (move.sqrMagnitude > 0.01f ? speed : 0f);
-            _planarVelocity = Vector3.Lerp(_planarVelocity, targetVel, acceleration * Time.deltaTime);
+            bool moving = move.sqrMagnitude > 0.001f;
+            // Analog tilt: partial gamepad-stick push walks slower (keyboard magnitude is always 1)
+            Vector3 targetVel = desired * (moving ? _speedCur * Mathf.Clamp01(move.magnitude) : 0f);
+            // Frame-rate-independent exponential smoothing
+            _planarVelocity = Vector3.Lerp(_planarVelocity, targetVel, 1f - Mathf.Exp(-acceleration * Time.deltaTime));
 
-            // Rotate body toward movement direction
-            if (_planarVelocity.sqrMagnitude > 0.01f)
-            {
-                Quaternion look = Quaternion.Slerp(transform.rotation,
-                    Quaternion.LookRotation(_planarVelocity), Time.deltaTime * 10f);
-                transform.rotation = look;
-            }
+            // Rotate body toward the INPUT direction (not the lagged velocity) — this replaced
+            // the old velocity-slerp that fought with mouse yaw and caused rubber-banding.
+            if (moving && ControlsEnabled)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desired),
+                    1f - Mathf.Exp(-turnSpeed * Time.deltaTime));
 
             // Grounded gravity + jump (jump suppressed while combat locks controls)
             if (_cc.isGrounded)

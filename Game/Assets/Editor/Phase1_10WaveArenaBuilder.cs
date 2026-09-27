@@ -93,6 +93,27 @@ namespace Bayani.EditorTools
             var zone = arena.AddComponent<Bayani.Core.MemoryStabilityZone>();
             zone.zoneName = "Mactan (arena test)";
 
+            // Phasing 2.2 — scannable relic: TALA panel + Diwa/stability/XP rewards (SO-driven)
+            var relic = GetOrCreate($"{DataDir}/Artifact_ShadowCharm.asset", () =>
+            {
+                var a = ScriptableObject.CreateInstance<Bayani.Story.ArtifactData>();
+                a.artifactId = "AR_0001";
+                a.displayName = "Shadow Charm";
+                a.description = "Carved bone charm, anito-guardian type. TALA: \"Belief record attributes these to village protectors. The corrosion here predates the Limot event — I am... uncertain. Recommend restoration of local memory before conclusion.\"";
+                a.historicalStatus = "ethnographic";
+                a.codexCategory = "SPIRITS";
+                return a;
+            });
+            var relicGO = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            relicGO.name = "Scannable_Relic";
+            relicGO.transform.SetParent(arena.transform, false);
+            relicGO.transform.localPosition = new Vector3(3f, 0.9f, 3f);
+            relicGO.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
+            var rc = relicGO.GetComponent<BoxCollider>();
+            rc.isTrigger = true;
+            rc.size = Vector3.one * 2.4f;
+            relicGO.AddComponent<Bayani.Story.ArtifactScanner>().data = relic;
+
             // wave title cards need a ScreenFader host in this scene
             if (Object.FindFirstObjectByType<Bayani.Story.ScreenFader>() == null)
             {

@@ -13,6 +13,12 @@ namespace Bayani.UI
         private PlayerCombat _combat;
         private string _flash = "";
         private float _flashUntil;
+        private float _fps;                          // smoothed fps — the Phase 1 gate box reads this
+
+        private void Update()
+        {
+            _fps = Mathf.Lerp(_fps, 1f / Time.unscaledDeltaTime, Time.unscaledDeltaTime * 4f);
+        }
 
         private void Start()
         {
@@ -59,6 +65,11 @@ namespace Bayani.UI
 
             GUI.Label(new Rect(20f, Screen.height - 30f, 900f, 24f),
                 "ATTACK LMB/LT · HOLD BLOCK RMB/X (perfect-timed = PARRY +12) · DODGE LCtrl/RT · SKILL Q/Y · MOVE WASD/stick");
+
+            // FPS, top-right: green ≥55 · yellow ≥40 · red below (60 FPS gate check)
+            var fs = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperRight, fontSize = 16, fontStyle = FontStyle.Bold };
+            fs.normal.textColor = _fps >= 55f ? new Color(0.4f, 0.9f, 0.45f) : _fps >= 40f ? Color.yellow : Color.red;
+            GUI.Label(new Rect(Screen.width - 160f, 14f, 145f, 22f), $"{_fps:F0} FPS", fs);
         }
 
         private void Bar(float x, float y, float w, float pct, Color c, string label)
