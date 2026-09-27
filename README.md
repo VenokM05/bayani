@@ -9,6 +9,7 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 | File | Role | Authority |
 |---|---|---|
 | [`docs/ggd.md`](docs/ggd.md) | **Game Design Document — canonical spec** | ✅ **Source of truth.** Includes §56 Canonical Resolutions (conflict register, undefined-mechanics definitions, scope rulings, corrected Unity structure, source references) |
+| [`docs/phasing.md`](docs/phasing.md) | Development Phasing — step-by-step P0–P5 with exit gates and anti-scope rules | Sequences ggd.md §56 rulings; ggd.md wins on conflicts |
 | [`docs/core_of_bayani.md`](docs/core_of_bayani.md) | Design Rationale Appendix — player journey, combat feel, mythology handling, narration philosophy | Supporting; conflicts resolved in ggd.md §56 |
 | [`docs/blueprints.md`](docs/blueprints.md) | Production & Narrative Appendix — opening cinematic, scene breakdowns, quest/NPC data shapes | Supporting; conflicts resolved in ggd.md §56 |
 
@@ -18,7 +19,7 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 
 **Not the full game.** The order of work is:
 
-1. **5-minute combat + discovery prototype** (graybox, one enemy, one weapon, one artifact scan, Windows-only, offline) — the go/no-go test for the project. Spec: core_of_bayani.md §47 + ggd.md §56.8.
+1. **5-minute combat + discovery prototype** (graybox, one enemy, one weapon, one artifact scan, Windows-only, offline) — the go/no-go test for the project. Spec: docs/phasing.md Phase 0–2 + core_of_bayani.md §47 + ggd.md §56.8.
 2. **Vertical slice** — 60–90 min, local save only, **no backend** (ruling: ggd.md §56.6).
 3. Everything else (mobile, web, Laravel cloud features, later eras) comes after the slice proves the game is fun.
 
@@ -26,7 +27,8 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 
 ```text
 bayani/
-├── docs/        # design documents (start with ggd.md)
+├── docs/        # design documents (start with ggd.md, then phasing.md)
+├── content/     # design-data schemas (_templates/) + asset tracker (_asset_needs.md)
 ├── Game/        # Unity project root (created at prototype kickoff)
-└── .gitignore   # Unity + OS + IDE ignores, ready for Game/
+└── .gitignore   # Unity + OS + IDE ignores; .gitattributes has Git LFS rules
 ```
