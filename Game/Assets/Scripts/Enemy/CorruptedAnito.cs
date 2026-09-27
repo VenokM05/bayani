@@ -59,11 +59,6 @@ namespace Bayani.Enemy
             _mpb = new MaterialPropertyBlock();
             _baseScale = transform.localScale;
             if (hitbox != null) hitbox.DeactivateWindow();
-            // 10B diagnostic: does THIS scene's boss have its wiring? (data/hurtbox/player
-            // unassigned = built by the pre-fix cave builder — rebuild + installer fixes it)
-            Debug.Log($"[BAYANI][10B-probe] Anito Awake: data={(data != null ? data.name : "NULL")} " +
-                      $"hurtbox={(hurtbox != null ? "ok" : "NULL")} player={(player != null ? "ok" : "NULL")} " +
-                      $"damageableResolves={(GetComponentInParent<IDamageable>() != null)} hp={_hp:0}");
         }
 
         private void OnEnable()
@@ -309,9 +304,6 @@ namespace Bayani.Enemy
 
         public void ApplyDamage(float damage, Vector3 fromPos, float knockback)
         {
-            // 10B diagnostic: if this never prints, hits die upstream (overlap/team/invuln)
-            Debug.Log($"[BAYANI][10B-probe] Anito ApplyDamage {damage:0} kb={knockback:0.0} " +
-                      $"state={_state} dead={_dead} invuln={(hurtbox != null && hurtbox.IsInvulnerable)}");
             if (_dead || _state == State.Dormant) return;
 
             if (_state == State.ShadowCall && knockback >= data.staggerKnockback)
