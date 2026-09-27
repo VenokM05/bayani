@@ -26,6 +26,21 @@ namespace Bayani.Enemy
         private CharacterController _cc;   // optional; falls back to transform move
         private bool _staggered;
         private Vector3 _baseScale = Vector3.one;
+        private bool _countedAsNest;         // Memory Stability drain registration (ggd §56.3)
+
+        private void OnEnable()
+        {
+            if (!_countedAsNest && Bayani.Core.MemoryStabilityZone.Current != null)
+            {
+                Bayani.Core.MemoryStabilityZone.Current.NestArrived();
+                _countedAsNest = true;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_countedAsNest) Bayani.Core.MemoryStabilityZone.Current?.NestLeft();
+        }
 
         private void Awake()
         {
@@ -206,6 +221,13 @@ namespace Bayani.Enemy
             hitbox?.DeactivateWindow();
             PulseVisual(1f, new Color(0.25f, 0.2f, 0.3f));
             player?.OnKillConfirmed(data);
+            // Memory Stability: kill = +stability, and this nest stops draining (ggd §56.3)
+            if (_countedAsNest)
+            {
+                Bayani.Core.MemoryStabilityZone.Current?.NestLeft();
+                _countedAsNest = false;
+            }
+            Bayani.Core.MemoryStabilityZone.Current?.AddStability(data.stabilityOnKill, $"{data.enemyName} defeated");
             Debug.Log($"[BAYANI] {data.enemyName} destroyed (+{data.diwaOnKill} Diwa, +{data.xpOnKill} XP in Phase 2)");
             Destroy(GetComponent<Hurtbox>());
             // Sink into the ground like dissolving memory, then remove

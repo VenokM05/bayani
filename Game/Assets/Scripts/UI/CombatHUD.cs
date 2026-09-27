@@ -2,6 +2,7 @@
 // IMGUI on purpose: zero scene setup, disposable when the real UI Prefabs arrive.
 
 using Bayani.Combat;
+using Bayani.Core;
 using UnityEngine;
 
 namespace Bayani.UI
@@ -43,7 +44,16 @@ namespace Bayani.UI
             Bar(x, 46f, w, _res.Stamina / _res.MaxStamina, new Color(0.3f, 0.8f, 0.4f), "STAMINA");
             Bar(x, 72f, w, _res.Diwa / _res.MaxDiwa, new Color(0.35f, 0.55f, 0.95f), "DIWA");
 
-            GUI.Label(new Rect(x, 96f, 400f, 22f), _combat != null ? _combat.StateText : "");
+            // Memory Stability row — only when a zone exists (ggd §56.3; HUD starts at 80%)
+            var zone = MemoryStabilityZone.Current;
+            float stateY = 96f;
+            if (zone != null)
+            {
+                Bar(x, 98f, w, zone.Value / 100f, new Color(0.62f, 0.42f, 0.85f), $"MEMORY {zone.Value:0}% · {zone.zoneName}");
+                stateY = 124f;
+            }
+
+            GUI.Label(new Rect(x, stateY, 400f, 22f), _combat != null ? _combat.StateText : "");
             if (Time.unscaledTime < _flashUntil)
                 GUI.Label(new Rect(x + w + 14f, 72f, 200f, 24f), $"<b>{_flash}</b>");
 

@@ -13,6 +13,7 @@ using Bayani.Enemy;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Bayani.EditorTools
 {
@@ -85,6 +86,13 @@ namespace Bayani.EditorTools
             center.transform.SetParent(arena.transform, false);
             spawner.arenaCenter = center.transform;
 
+            // Memory Stability v1 testbed (ggd §56.3): living Limot drain the score,
+            // kills restore it, and the world visibly desaturates as it falls.
+            arena.AddComponent<Volume>();
+            arena.AddComponent<Bayani.Story.StabilityLook>();
+            var zone = arena.AddComponent<Bayani.Core.MemoryStabilityZone>();
+            zone.zoneName = "Mactan (arena test)";
+
             // wave title cards need a ScreenFader host in this scene
             if (Object.FindFirstObjectByType<Bayani.Story.ScreenFader>() == null)
             {
@@ -95,7 +103,7 @@ namespace Bayani.EditorTools
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
 
-            Debug.Log("[BAYANI] Wave arena ready: 3 waves → 2 / 4 / 7 spawned, up to 10 alive in wave 3. Watch the FPS counter!");
+            Debug.Log("[BAYANI] Wave arena ready: 3 waves → 2 / 4 / 7 spawned, up to 10 alive in wave 3. Watch the FPS counter — and the MEMORY bar draining while Limot live!");
             EditorUtility.DisplayDialog("Wave arena ready",
                 "Enemy prefabs + WaveData_Arena.asset created.\n\n" +
                 "Press PLAY in SC_00_Prototype:\n• Waves spawn in a ring (title cards announce them)\n" +

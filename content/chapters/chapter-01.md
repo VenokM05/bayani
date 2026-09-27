@@ -11,7 +11,7 @@
 | 06–08 | Arrival, Sugbu, court | `locations/cebu-1521.md`, `characters/humabon.md` | not built |
 | **07B** | **The First Shadow** (combat tutorial) | `enemies/anino.md` | combat core built (Phase 1) |
 | 09 | Mactan, Lapu-Lapu seen | `locations/mactan-1521.md`, `characters/lapu-lapu.md` | not built |
-| **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | not built |
+| **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | Stability HUD v1 built as arena testbed (phasing 2.4); artifact scan pending (2.2) |
 | 10 | Night before, the fire circle | `characters/ancestor.md` | not built |
 | **10B** | **Corrupted Anito** (cave mini-boss) | `enemies/corrupted-anito.md` | not built |
 | 11 | The battle + **Memory Devourer** | `locations/battle-shore.md`, `enemies/memory-devourer.md` | not built |
