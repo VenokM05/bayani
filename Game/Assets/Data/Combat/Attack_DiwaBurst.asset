@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bef4904ae262ae4f9fc818fa396500b, type: 3}
+  m_Name: Attack_DiwaBurst
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Combat.AttackData
+  attackName: DIWA BURST
+  isHeavy: 0
+  isSkill: 1
+  windup: 0.22
+  active: 0.18
+  recovery: 0.35
+  damage: 25
+  staminaCost: 0
+  diwaCost: 25
+  knockback: 4
+  range: 2.2
+  comboWindowAfterActive: 0.3

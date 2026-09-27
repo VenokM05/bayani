@@ -30,22 +30,39 @@ namespace Bayani.Player
         private Vector3 _planarVelocity;
         private float _verticalVelocity;
         private float _cameraPitch;
+        private Bayani.Combat.CombatResources _resources;   // optional: sprint drains stamina (§56.2)
+
+        /// <summary>PlayerCombat locks controls during attacks/dodges (phasing 1.4).</summary>
+        public bool ControlsEnabled = true;
 
         private void Awake()
         {
             _cc = GetComponent<CharacterController>();
             if (lookCamera == null) lookCamera = Camera.main;
+            _resources = GetComponent<Bayani.Combat.CombatResources>();
+        }
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;   // clean mouse look for the prototype
+            Cursor.visible = false;
         }
 
         private void Update()
         {
-            Vector2 move = Keyboard.current != null
-                ? new Vector2(
+            Vector2 move = (!ControlsEnabled || Keyboard.current == null) ? Vector2.zero
+                : new Vector2(
                     (Keyboard.current.dKey.isPressed ? 1f : 0f) - (Keyboard.current.aKey.isPressed ? 1f : 0f),
-                    (Keyboard.current.wKey.isPressed ? 1f : 0f) - (Keyboard.current.sKey.isPressed ? 1f : 0f))
-                : Vector2.zero;
+                    (Keyboard.current.wKey.isPressed ? 1f : 0f) - (Keyboard.current.sKey.isPressed ? 1f : 0f));
 
-            bool running = Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed;
+            bool running = ControlsEnabled && Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed
+                           && move.sqrMagnitude > 0.01f;
+            // Sprint costs 10 stamina/s (ggd §56.2); no sprint when the meter is empty
+            if (running && _resources != null)
+            {
+                if (_resources.Stamina <= 0f) running = false;
+                else _resources.SpendStamina(10f * Time.deltaTime);
+            }
             float speed = running ? runSpeed : walkSpeed;
 
             // Camera-relative movement direction
@@ -63,11 +80,11 @@ namespace Bayani.Player
                 transform.rotation = look;
             }
 
-            // Grounded gravity + jump
+            // Grounded gravity + jump (jump suppressed while combat locks controls)
             if (_cc.isGrounded)
             {
                 _verticalVelocity = -1f;
-                if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+                if (ControlsEnabled && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
                     _verticalVelocity = Mathf.Sqrt(2f * -gravity * jumpHeight);
             }
             else
