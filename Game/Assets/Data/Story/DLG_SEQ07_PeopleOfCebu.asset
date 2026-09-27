@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50060b8dc62b41a419acff01334cb145, type: 3}
+  m_Name: DLG_SEQ07_PeopleOfCebu
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.DialogueAsset
+  lines:
+  - speaker: NARRATION
+    text: "Kai is discovered by locals. Their eyes catch the strange clothing \u2014
+      fabrics with no year they know."
+  - speaker: NARRATION
+    text: Kai tries to explain who he is. Nobody believes him.
+  - speaker: NARRATION
+    text: He is brought toward the settlement. Foreign visitors. Local leaders. Trade.
+      Gifts. Different languages. Different beliefs.
+  - speaker: NARRATION
+    text: 'A port at full work: bangka fleets, hammered outriggers, gold and cotton,
+      courts that speak in trade-metaphors.'
+  - speaker: KAI
+    text: This isn't simply a battle. It is a moment when two worlds are meeting
+      for the first time.

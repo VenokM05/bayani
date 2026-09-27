@@ -8,10 +8,10 @@
 | SEQ | Beat | Content | Unity status |
 |---|---|---|---|
 | 01–05 | 2187, argument, transit, activation | `locations/ruins-2187.md` | **graybox built** — Tools → BAYANI → Phase 2 prologue (SC_00_FutureManila) |
-| 06–08 | Arrival, Sugbu, court | `locations/cebu-1521.md`, `characters/humabon.md` | not built |
-| **07B** | **The First Shadow** (combat tutorial) | `enemies/anino.md` | combat core built (Phase 1) |
+| 06–08 | Arrival, Sugbu, court | `locations/cebu-1521.md`, `characters/humabon.md` | **graybox built** — Tools → BAYANI → Phase 2 Cebu (SC_03_Cebu) |
+| **07B** | **The First Shadow** (combat tutorial) | `enemies/anino.md` | **graybox built** — scripted `TutorialAmbush` in SC_03_Cebu (no death possible) |
 | 09 | Mactan, Lapu-Lapu seen | `locations/mactan-1521.md`, `characters/lapu-lapu.md` | not built |
-| **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | Stability HUD v1 built as arena testbed (phasing 2.4); artifact scan pending (2.2) |
+| **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | Systems built (stability HUD 2.4 + artifact scan 2.2, arena testbed); the shore-shrine scene itself not built |
 | 10 | Night before, the fire circle | `characters/ancestor.md` | not built |
 | **10B** | **Corrupted Anito** (cave mini-boss) | `enemies/corrupted-anito.md` | not built |
 | 11 | The battle + **Memory Devourer** | `locations/battle-shore.md`, `enemies/memory-devourer.md` | not built |
