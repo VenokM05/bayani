@@ -29,7 +29,7 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 ```text
 bayani/
 ├── docs/        # design documents (start with ggd.md, then phasing.md)
-├── content/     # design-data schemas (_templates/) + asset tracker (_asset_needs.md)
+├── content/     # design data: chapters/ index, characters/, locations/, enemies/ + _templates/ + _asset_needs.md
 ├── Game/        # Unity project root (created at prototype kickoff)
 └── .gitignore   # Unity + OS + IDE ignores; .gitattributes has Git LFS rules
 ```

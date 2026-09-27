@@ -1,0 +1,25 @@
+# Chapter 1 — Echoes of Mactan ("The Blood Remembers")
+
+> Narrative canon: `docs/storyline.md` (SEQ 01–17 + the playable 07B/09B/10B/11 beats).
+> Systems canon: `docs/ggd.md` §56. This file is the **index** — content files below are the data.
+
+## Sequences → what exists where
+
+| SEQ | Beat | Content | Unity status |
+|---|---|---|---|
+| 01–05 | 2187, argument, transit, activation | `locations/ruins-2187.md` | not built |
+| 06–08 | Arrival, Sugbu, court | `locations/cebu-1521.md`, `characters/humabon.md` | not built |
+| **07B** | **The First Shadow** (combat tutorial) | `enemies/anino.md` | combat core built (Phase 1) |
+| 09 | Mactan, Lapu-Lapu seen | `locations/mactan-1521.md`, `characters/lapu-lapu.md` | not built |
+| **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | not built |
+| 10 | Night before, the fire circle | `characters/ancestor.md` | not built |
+| **10B** | **Corrupted Anito** (cave mini-boss) | `enemies/corrupted-anito.md` | not built |
+| 11 | The battle + **Memory Devourer** | `locations/battle-shore.md`, `enemies/memory-devourer.md` | not built |
+| 12–13 | Goodbye, the pull-back | `characters/ancestor.md` | not built |
+| 14–17 | Return, erased family, the blank page | `locations/ruins-2187.md` | not built |
+
+## Ids reserved
+`CH_0005` Elder of Cebu · `CH_0006` Warrior of the Night Before · `AR_ARTIFACT` · `QU_000`–`QU_002`
+
+## Build state
+Only Phase 0 + Phase 1 combat graybox exists (`Game/Assets/Scripts/`, `Assets/Data/Combat/`). Chapter 1 scenes `SC_03`–`SC_05` are unbuilt — see `docs/phasing.md` for the order.
