@@ -23,7 +23,7 @@ namespace Bayani.Player
         [SerializeField] private float jumpHeight = 1.0f;
 
         [Header("Camera")]
-        [SerializeField] private Camera lookCamera;
+        [SerializeField] public Camera lookCamera;   // public: wired directly by Phase0SceneBuilder
         [SerializeField] private float mouseSensitivity = 0.1f;
 
         private CharacterController _cc;

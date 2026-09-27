@@ -9,7 +9,7 @@ namespace Bayani.Core
 {
     public class ThirdPersonFollowCamera : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        [SerializeField] public Transform target;   // public: wired directly by Phase0SceneBuilder
         [SerializeField] private float distance = 4f;
         [SerializeField] private float heightOffset = 1.4f;
         [SerializeField] private float smoothTime = 0.12f;
