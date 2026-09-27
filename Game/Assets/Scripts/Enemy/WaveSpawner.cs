@@ -17,15 +17,28 @@ namespace Bayani.Enemy
         public Transform[] spawnPoints;       // cycled; ring around the arena
         [Tooltip("Optional center for face-toward spawn rotation; defaults to player position.")]
         public Transform arenaCenter;
+        [Tooltip("false = wait for Begin() (story-triggered waves, e.g. Mactan shrine clear).")]
+        public bool autoStart = true;
+        [Tooltip("Title card on full clear; empty = arena stress-rig message.")]
+        public string clearTitle;
 
         private readonly List<LimotEnemy> _alive = new List<LimotEnemy>();
         private int _spawnCursor;
+
+        private bool _begun;
 
         public int AliveCount => _alive.Count(e => e != null && !e.IsDead);
 
         private void Start()
         {
-            if (data == null || data.waves == null || data.waves.Length == 0) return;
+            if (autoStart) Begin();
+        }
+
+        /// <summary>Idempotent start — StoryTrigger.spawnOnFinish calls this after dialogue.</summary>
+        public void Begin()
+        {
+            if (_begun || data == null || data.waves == null || data.waves.Length == 0) return;
+            _begun = true;
             if (FindFirstObjectByType<PlayerCombat>() == null)
                 Debug.LogWarning("[BAYANI] WaveSpawner: no PlayerCombat found — wire Kai up first (Phase 1 builder).", this);
             StartCoroutine(RunWaves());
@@ -55,7 +68,8 @@ namespace Bayani.Enemy
                 _alive.RemoveAll(e => e == null || e.IsDead);
                 yield return new WaitForSeconds(data.clearHold);
             }
-            Bayani.Story.ScreenFader.TitleCard("ARENA CLEARED — check the FPS counter!", 4f);
+            Bayani.Story.ScreenFader.TitleCard(
+                string.IsNullOrEmpty(clearTitle) ? "ARENA CLEARED — check the FPS counter!" : clearTitle, 4f);
         }
 
         private void Spawn(GameObject prefab)

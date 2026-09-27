@@ -16,6 +16,7 @@ namespace Bayani.Story
         public string titleCard;            // shown when the sequence starts ("" = none)
         public bool flashOnStart;           // SEQ 04 vision flash
         public string finaleCaption;        // if set: after dialogue, fade to black and hold this text
+        public Bayani.Enemy.WaveSpawner spawnOnFinish;   // story-sequenced fight (Mactan shrine clear)
 
         private bool _done;
         private bool _inside;
@@ -59,9 +60,16 @@ namespace Bayani.Story
             if (flashOnStart) ScreenFader.Flash();
 
             if (!string.IsNullOrEmpty(finaleCaption))
-                DialoguePlayer.Instance.Play(dialogue, () => ScreenFader.BlackOut(finaleCaption, 1.5f, 4f, 1f));
+                DialoguePlayer.Instance.Play(dialogue, () =>
+                {
+                    if (spawnOnFinish != null) spawnOnFinish.Begin();
+                    ScreenFader.BlackOut(finaleCaption, 1.5f, 4f, 1f);
+                });
             else
-                DialoguePlayer.Instance.Play(dialogue);
+                DialoguePlayer.Instance.Play(dialogue, () =>
+                {
+                    if (spawnOnFinish != null) spawnOnFinish.Begin();
+                });
         }
     }
 }

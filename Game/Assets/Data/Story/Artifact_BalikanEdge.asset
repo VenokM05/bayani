@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9325119dd94b84eb9f611ad69741a5, type: 3}
+  m_Name: Artifact_BalikanEdge
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.ArtifactData
+  artifactId: AR_0002
+  displayName: Balikan Edge
+  description: 'TALA: Weapon-class memory, designation BALIKAN EDGE. Forging lineage
+    predates contact records; the alloy reads local, the intent does not. This object
+    answers to the bearer''s bloodline. It was made to be found by you. Codex entry
+    written.'
+  historicalStatus: fictional
+  codexCategory: HERITAGE
+  diwaReward: 15
+  stabilityReward: 3
+  xpReward: 50

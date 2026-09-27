@@ -29,6 +29,7 @@ namespace Bayani.EditorTools
             ("Assets/Scenes/Prototype/SC_00_Prototype.unity", new Vector3(0f, 1.2f, 0f)),
             ("Assets/Scenes/Chapter1/SC_00_FutureManila.unity", new Vector3(0f, 1.2f, 1.5f)),
             ("Assets/Scenes/Chapter1/SC_03_Cebu.unity", new Vector3(0f, 1.2f, 4f)),
+            ("Assets/Scenes/Chapter1/SC_04_Mactan.unity", new Vector3(0f, 1.2f, 2f)),
         };
 
         // Menu validation: only show when the FBX is actually in the project,

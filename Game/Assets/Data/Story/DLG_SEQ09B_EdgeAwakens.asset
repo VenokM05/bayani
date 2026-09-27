@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50060b8dc62b41a419acff01334cb145, type: 3}
+  m_Name: DLG_SEQ09B_EdgeAwakens
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.DialogueAsset
+  lines:
+  - speaker: NARRATION
+    text: At the Mactan shore shrine, Kai's artifact drinks the tide.
+  - speaker: NARRATION
+    text: "The blade unfolds from it \u2014 the Balikan Edge."
+  - speaker: NARRATION
+    text: A weapon made of returning, shaped by the family that hid it for 666 years.
+  - speaker: NARRATION
+    text: The first person to bow to Kai holding it is the blacksmith who forged
+      its ancestor.
+  - speaker: NARRATION
+    text: "The artifact was never a key only \u2014 it is an inherited weapon system,
+      dormant until carried into the memory it was made in."
+  - speaker: NARRATION
+    text: "The shrine reads the village memory: 80%. Something beneath us is being
+      forgotten. The shadows on the headland will make it brighter \u2014 and the
+      edge will teach you to scan them."
