@@ -1754,6 +1754,8 @@ Alternative:
 | 8 | Language barrier | blueprints §13 (TALA can't translate) vs ggd §5 (translation function) | TALA translates approximately with stated uncertainty; **atmosphere, never a mechanic** (ggd §5 note). |
 | 9 | Endings | core §37 vs blueprints §36–37 narration | Both kept; **blueprints §36–37 is the canonical scene order** (Lapu-Lapu exchange → return → TALA "You changed nothing" → final narration). core §37 narration folds into the closing voice-over. |
 | 10 | Platforms | 5 platforms listed everywhere | **Windows-only during prototyping and the slice** (core §41 Phase 1). Mobile/web/iOS/macOS targets remain, but no platform-specific work until the slice is fun on PC. |
+| 11 | Narrative canon | Chapter-1 story existed only as scattered flows (§47–48, core §36–37, blueprints §34–36) | **`docs/storyline.md` is the narrative canon for Chapter 1** (SEQ beats + Gameplay Beat Map). Authority split: storyline.md governs story beats/tone/order; **this GDD (§56) still governs systems, scope, and numbers**. Locked decisions: future year = **2187** (storyline's "2026" corrected); **Kai is a son**; chapter title **"Echoes of Mactan (The Blood Remembers)"**; story sequences numbered **SEQ** (not SCENE) to avoid Unity `SC_*` collision. |
+| 12 | Series structure | No prior canon for post-Chapter-1 games | Per storyline.md twist section: the artifact travels through **bloodline memories**, each chapter = one ancestor/era; the Memory Devourer is **expelled, never killed**, fleeing deeper each chapter; the 2187 framing changes slightly between chapters. Any new chapter doc must follow storyline.md's Beat Rules. |
 
 ## 56.2 Core Resources — HP, Stamina, Diwa
 

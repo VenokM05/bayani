@@ -1,6 +1,17 @@
-# BAYANI — CHAPTER 01: MACTAN
+# BAYANI — CHAPTER 01: ECHOES OF MACTAN
 
-## **“The Blood Remembers”**
+## **"The Blood Remembers"**
+
+> 📖 **NARRATIVE CANON — CHAPTER 1 STORY GUIDELINE**
+>
+> This document governs **story beats, characters, tone, and sequence order** for Chapter 1.
+> `ggd.md` (§56) remains canonical for **systems, mechanics, scope, and numbers**.
+> Conflicts resolved as follows (registered in ggd §56.1):
+> - Future year is **2187** everywhere (ggd canon; this doc once said 2026 — corrected).
+> - **Kai is a son** (Scene 15 locks the family's line; all docs & content/ follow this).
+> - Chapter title: **BAYANI — Chapter 1: Echoes of Mactan ("The Blood Remembers")**.
+> - Story "SCENE"s are renamed **SEQ** (narrative sequence) to avoid colliding with Unity scene assets (`SC_*`).
+> - New **PLAYABLE beats (07B, 09B, 10B)** and the **Gameplay Beat Map** at the end wire the combat systems (Limot, Diwa, Memory Stability, bosses) INTO these beats — the slice must be playable, not just watchable.
 
 ### Story Premise
 
@@ -28,7 +39,7 @@ They arrive during one of the most important moments in Philippine history.
 
 ---
 
-# SCENE 01 — THE QUESTION
+# SEQ 01 — THE QUESTION
 
 ### Location
 
@@ -85,7 +96,7 @@ Subtle glitch whenever Kai looks at the artifact.
 
 ---
 
-# SCENE 02 — THE ARGUMENT
+# SEQ 02 — THE ARGUMENT
 
 Kai confronts their parents.
 
@@ -131,7 +142,7 @@ Kai leaves the house.
 
 ---
 
-# SCENE 03 — RUNNING AWAY
+# SEQ 03 — RUNNING AWAY
 
 Kai runs through the city.
 
@@ -165,7 +176,7 @@ The further Kai goes, the older the environment becomes.
 
 ---
 
-# SCENE 04 — THE ARTIFACT
+# SEQ 04 — THE ARTIFACT
 
 Inside the ruins, Kai discovers ancient markings.
 
@@ -199,7 +210,7 @@ The symbol begins glowing.
 
 ---
 
-# SCENE 05 — THE FALL THROUGH TIME
+# SEQ 05 — THE FALL THROUGH TIME
 
 The artifact activates.
 
@@ -207,7 +218,7 @@ The entire environment fractures.
 
 Kai sees:
 
-**2026**
+**2187**
 
 then:
 
@@ -225,7 +236,7 @@ Kai wakes up on a beach.
 
 ---
 
-# SCENE 06 — CEBU, 1521
+# SEQ 06 — CEBU, 1521
 
 This is where we align the story with history.
 
@@ -238,6 +249,8 @@ The ships are visible offshore.
 Kai watches people reacting to the unfamiliar vessels.
 
 ### Visual
+
+> ⚠️ **LINK WARNING:** the images below are signed `images.openai.com` URLs from the original chat — they WILL expire. Re-save them into `content/references/` and re-link locally before this doc is relied on.
 
 ![Image](https://images.openai.com/static-rsc-4/bndfRyBT0jqI_nQouS3Sv5mc3PQjIg4fPgkwv3TtpXItzz0_YCkp9_ywKxEa4MW99SftqaatwgjwB_KZxIjJXnDSdqOMwueDkcnL5ragwadtV1TAYJZ1aDrGi6LmF1Pdy5MeHeAwswnGwcPF2ek5kadZVGD238new3ynWWYoDuEDPPvAwvTHAMdUEjp1jA5n?purpose=fullsize)
 
@@ -277,7 +290,7 @@ European ships.
 
 ---
 
-# SCENE 07 — THE PEOPLE OF CEBU
+# SEQ 07 — THE PEOPLE OF CEBU
 
 Kai is discovered by locals.
 
@@ -334,7 +347,31 @@ Show an organized society with:
 
 ---
 
-# SCENE 08 — THE NAME
+# SEQ 07B — THE FIRST SHADOW  *(PLAYABLE — combat tutorial)*
+
+Night. Kai is shown to a shelter by a Cebuano family.
+
+The firelight **flickers wrong** — the shadows peel off the walls.
+
+Something formless comes for Kai.
+
+> **Elder:** “The *anito* of forgotten places grow bold when strangers carry old light.”
+
+The artifact flares — and holds the shadow at bay.
+
+The villagers name what attacked:
+
+> **“Limot.”** *(that which is forgotten)*
+
+### What this beat explains
+
+* **Why monsters exist in a real history:** the Limot are what memory becomes when it is *eaten* — they swarm where the past is being forgotten. Kai, carrying the artifact into a memory of 1521, is a wound they can smell.
+* **Why Kai fights:** the artifact answers to Kai's blood. This is the first proof it *chose* them.
+* **Teaches:** light attack chain, dodge, lock-on. One slow Anino. No death possible — the elder finishes it (scripted rescue), so the lesson is pressure without punishment.
+
+---
+
+# SEQ 08 — THE NAME
 
 Kai hears a name repeatedly.
 
@@ -370,7 +407,7 @@ Warrior:
 
 ---
 
-# SCENE 09 — MACTAN
+# SEQ 09 — MACTAN
 
 Days pass.
 
@@ -414,7 +451,23 @@ Instead, Kai watches.
 
 ---
 
-# SCENE 10 — THE NIGHT BEFORE
+# SEQ 09B — THE EDGE AWAKENS  *(PLAYABLE — power grant + scanning)*
+
+At the Mactan shore shrine, Kai's artifact drinks the tide.
+
+The blade unfolds from it — **the Balikan Edge** (ggd §48): a weapon made of *returning*, shaped by the family that hid it for 666 years.
+
+The first person to bow to Kai holding it is the blacksmith who forged its ancestor.
+
+### What this beat explains
+
+* **Why Kai suddenly has powers:** the artifact was never a key only — it is an *inherited weapon system*, dormant until carried into the memory it was made in.
+* **Teaches:** heavy finisher, block/parry, **ARTIFACT SCAN** (reveal enemy intent, harvest codex entries — the 7-tab Codex starts filling here, ggd §56.1 #3).
+* **Memory Stability intro:** scanning the shrine shows the village memory at **80%** (ggd §56.3 start value). Clearing the first Limot pack raises it. The player *feels* the zone brighten — color, sound, NPCs returning.
+
+---
+
+# SEQ 10 — THE NIGHT BEFORE
 
 Kai speaks with an older warrior.
 
@@ -454,7 +507,27 @@ These are people's lives.
 
 ---
 
-# SCENE 11 — THE BATTLE OF MACTAN
+# SEQ 10B — THE CAVE BENEATH THE SHORE  *(PLAYABLE — mini-boss: THE CORRUPTED ANITO)*
+
+Before dawn, the stability beneath the village **collapses to 0%.**
+
+Not naturally. Something down there is *feeding*.
+
+In the cave under the shore, Kai finds it: an **anito — a guardian image of the village — inverted**, gnawing the memory of the people it once protected.
+
+> **Kai:** “You're one of them… what did they do to you?”
+
+It answers by coming.
+
+### Rules of the fight (ggd §56.1 #2)
+
+* This is the **Corrupted Anito mini-boss** — *not* the final boss. It cannot be deleted, only **driven back**; it will be seen again deeper, and again in every era.
+* Win state: survive the phases, land the finishing exchange → **stability restore cinematic**: the village memory re-anchors at 100%. The people wake like sleepers.
+* Teaches: i-frame reading, punish windows, Diwa spend (Memory Shield unlock moment).
+
+---
+
+# SEQ 11 — THE BATTLE OF MACTAN
 
 The confrontation occurs.
 
@@ -488,6 +561,22 @@ The environment becomes chaotic.
 
 Kai tries to help their ancestor.
 
+And then Kai sees what no history book records.
+
+Above the shoreline, *unseen by everyone else* — a shape **eating the battle itself**. Warriors flicker where it passes. Cannon-smoke remembers going the wrong way.
+
+> **The Memory Devourer.** *(final boss — ggd §17)*
+
+It is why the Limot swarm. It is why this day was nearly lost to the family's blank page. It has been starving on this moment for six hundred years — and a living witness walking *inside* the memory is the fullest meal it has ever smelled.
+
+**Kai fights it in the seams of the battle** — the historical fight rages around the duel, recognizable and intact beneath it (Golden Rule: history is never rewritten, only *protected*).
+
+### Rules of the fight (slice finale)
+
+* Four phases per ggd §17, ending in the **recovered-memories sequence** (blueprints §34): the ancestors Kai met across SEQ 06–12 appear as the light that breaks it.
+* The Devourer is **driven out of this memory, not killed** — it flees deeper into the bloodline. Chapter 2's hook, seeded as canon.
+* During Phase 3, the pull-back begins *regardless of fight state* — the artifact is leaving with or without Kai's consent. The last phase IS the goodbye.
+
 But the artifact begins reacting.
 
 **The artifact is pulling Kai back.**
@@ -504,7 +593,7 @@ Kai realizes:
 
 ---
 
-# SCENE 12 — THE GOODBYE
+# SEQ 12 — THE GOODBYE
 
 Kai finds their ancestor.
 
@@ -554,7 +643,7 @@ Ancestor:
 
 ---
 
-# SCENE 13 — THE ARTIFACT TAKES KAI
+# SEQ 13 — THE ARTIFACT TAKES KAI
 
 The artifact suddenly erupts with light.
 
@@ -580,7 +669,7 @@ Then—
 
 ---
 
-# SCENE 14 — KAI RETURNS
+# SEQ 14 — KAI RETURNS
 
 Kai wakes up inside the cave.
 
@@ -624,7 +713,7 @@ Then another.
 
 ---
 
-# SCENE 15 — THE HEARTBREAK
+# SEQ 15 — THE HEARTBREAK
 
 Kai sees their parents.
 
@@ -684,7 +773,7 @@ Kai collapses.
 
 ---
 
-# SCENE 16 — THE TRUE TWIST
+# SEQ 16 — THE TRUE TWIST
 
 Kai looks at the family wall.
 
@@ -738,7 +827,7 @@ Kai realizes:
 
 ---
 
-# SCENE 17 — THE NEXT ERA
+# SEQ 17 — THE NEXT ERA
 
 The artifact shines brighter.
 
@@ -804,9 +893,9 @@ A glimpse of the next historical era appears for only one second.
 
 ---
 
-# The Important Twist
+# The Important Twist  *(series canon — design note, ggd §56.1 #11)*
 
-I would make the twist **not** simply "Kai changed history."
+The twist is **not** simply "Kai changed history."
 
 Instead:
 
@@ -825,3 +914,45 @@ And eventually Kai discovers:
 **It is taking Kai through the memories of their bloodline.**
 
 Each chapter reveals another ancestor, another historical period, and another piece of the reason Kai's family has been erased from the future.
+
+### How the twist maps onto systems (canonical)
+
+| Story concept | Game system |
+|---|---|
+| A memory being eaten | **Memory Stability %** per zone (ggd §56.3) — visuals, spawns, XP all read it |
+| The Limot | Enemies born where stability decays (Filipino-named roster, ggd §56.1 #5) |
+| Recovering a forgotten piece | **Codex unlocks** (7 tabs) + artifact scans |
+| The Devourer fleeing deeper | Next chapter's era, next ancestor's memory |
+| "The present changes slightly" | Future-Manila framing between chapters (local save narrative, no backend — ggd §56.6) |
+
+---
+
+# GAMEPLAY BEAT MAP — CHAPTER 01
+
+> The slice contract: which beats the player **plays**, which they **watch**, and what each one teaches. Total playable time must land ggd §47: slice **60–90 min**, demo cut **20–30 min**.
+
+| SEQ | Beat | Mode | Teaches / Systems introduced | Demo? |
+|---|---|---|---|---|
+| 01–05 | Future → argument → ruins → artifact → the Fall | 🎬 Cinematic (+ walking section in 2187) | Tone, narration voice, family mystery | ✅ (compressed) |
+| 06 | Arrival, Cebu 1521 | 🕹️ Explore | Camera, movement, interaction prompts | ✅ |
+| 07 | The People of Cebu | 🕹️ Explore + dialogue | Society, trade, no-fantasy tone; codex PEOPLE/PLACES seeds | ✅ |
+| **07B** | **The First Shadow** | ⚔️ **PLAYABLE tutorial** | Light chain, dodge, lock-on; **Limot introduced** | ✅ |
+| 08 | The Name | 🎬 + dialogue | Stakes: Kai knows tomorrow; Humabon / Lapu-Lapu | |
+| 09 | Mactan | 🕹️ Explore village | Quest hub, NPCs, Patos economy soft-intro | |
+| **09B** | **The Edge Awakens** | ⚔️ **PLAYABLE** | Heavy, block/parry, **ARTIFACT SCAN**, **Memory Stability HUD** | ✅ |
+| 10 | The Night Before | 🎬 dialogue | Theme: courage/fear (the doc's emotional peak) | |
+| **10B** | **Cave Beneath the Shore** | 👹 **MINI-BOSS: Corrupted Anito** | i-frame reading, punish windows, Diwa spend | |
+| 11 | Battle of Mactan + **MEMORY DEVOURER (4 phases)** | 👑 **PLAYABLE finale** | Everything combined; recovered-memories sequence | ✅ (boss gated in full slice) |
+| 12 | The Goodbye | 🎬 | Emotional payoff; ancestor identity hidden on purpose | |
+| 13 | The Pull | 🎬 | White-out transition | |
+| 14–15 | Kai Returns / erased family | 🕹️ Walking (interactive) | The gut-punch — empty house gameplay-free by design | |
+| 16 | The True Twist | 🎬 | Bloodline-memory reveal; the Voice (Devourer seed) | |
+| 17 | The Next Era | 🎬 | Chapter 2 hook: next era flash | |
+| END | TO BE CONTINUED → BOOM | 🎬 | Series promise | |
+
+### Beat rules (bind all future chapter docs)
+
+1. **History is never fantasy.** The supernatural exists *underneath* the real event (Limot, artifact, Devourer) — the battle itself stays as recorded. Golden Rule (ggd §52) applies to every beat above.
+2. **Every playable beat must justify a mechanic narratively.** No "monsters appear because the level needs content." They appear because a memory is rotting.
+3. **Kai never changes the outcome of history.** The Devourer fight happens in the *seams* — witnesses see Kai only in fragments.
+4. **The Devourer is never killed in a chapter** — only driven deeper into the bloodline. Each chapter's finale is an expulsion.

@@ -10,10 +10,11 @@ A third-person action-adventure RPG set in a stylized recreation of the 1521 Phi
 |---|---|---|
 | [`docs/ggd.md`](docs/ggd.md) | **Game Design Document — canonical spec** | ✅ **Source of truth.** Includes §56 Canonical Resolutions (conflict register, undefined-mechanics definitions, scope rulings, corrected Unity structure, source references) |
 | [`docs/phasing.md`](docs/phasing.md) | Development Phasing — step-by-step P0–P5 with exit gates and anti-scope rules | Sequences ggd.md §56 rulings; ggd.md wins on conflicts |
+| [`docs/storyline.md`](docs/storyline.md) | **Chapter 1 Narrative Canon — "The Blood Remembers"** (SEQ 01–17 + Gameplay Beat Map) | Story beats/tone: **wins**. Systems/scope/numbers: ggd.md §56 wins (register #11–12) |
 | [`docs/core_of_bayani.md`](docs/core_of_bayani.md) | Design Rationale Appendix — player journey, combat feel, mythology handling, narration philosophy | Supporting; conflicts resolved in ggd.md §56 |
 | [`docs/blueprints.md`](docs/blueprints.md) | Production & Narrative Appendix — opening cinematic, scene breakdowns, quest/NPC data shapes | Supporting; conflicts resolved in ggd.md §56 |
 
-> All three documents were reconciled on 2026-09-27. If you find a new contradiction, fix it **in `docs/ggd.md`** and add a row to the §56.1 register.
+> All documents were reconciled on 2026-09-27 (storyline.md added as narrative canon same month). If you find a new contradiction, fix it **in `docs/ggd.md`** and add a row to the §56.1 register. Narrative changes go through `docs/storyline.md` first.
 
 ## Current Milestone
 
