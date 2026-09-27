@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Bayani.Enemy
 {
-    public class LimotEnemy : MonoBehaviour, IDamageable
+    public class LimotEnemy : MonoBehaviour, IDamageable, IBattleHealth
     {
         [Header("Wired by Phase1 builder")]
         public EnemyData data;
@@ -30,6 +30,7 @@ namespace Bayani.Enemy
 
         private void OnEnable()
         {
+            BattleHealthRegistry.Add(this);
             if (!_countedAsNest && Bayani.Core.MemoryStabilityZone.Current != null)
             {
                 Bayani.Core.MemoryStabilityZone.Current.NestArrived();
@@ -39,8 +40,15 @@ namespace Bayani.Enemy
 
         private void OnDestroy()
         {
+            BattleHealthRegistry.Remove(this);
             if (_countedAsNest) Bayani.Core.MemoryStabilityZone.Current?.NestLeft();
         }
+
+        // ---- IBattleHealth (HUD overhead bars, PRD §6) ----
+        public float HealthFraction => _hp / Mathf.Max(1f, data.maxHP);
+        public string BarName => data.enemyName;
+        public Vector3 HeadPoint => transform.position + Vector3.up * (2f * transform.localScale.y);
+        public bool BarVisible => !IsDead;
 
         private void Awake()
         {

@@ -62,14 +62,19 @@ namespace Bayani.Story
             if (!string.IsNullOrEmpty(finaleCaption))
                 DialoguePlayer.Instance.Play(dialogue, () =>
                 {
-                    if (spawnOnFinish != null) spawnOnFinish.Begin();
+                    Finish();
                     ScreenFader.BlackOut(finaleCaption, 1.5f, 4f, 1f);
                 });
             else
-                DialoguePlayer.Instance.Play(dialogue, () =>
-                {
-                    if (spawnOnFinish != null) spawnOnFinish.Begin();
-                });
+                DialoguePlayer.Instance.Play(dialogue, Finish);
+
+            void Finish()
+            {
+                // objective completion pays XP (ggd §56.4 quests 250–800) — 0 on old assets
+                if (dialogue.xpReward > 0)
+                    Bayani.Combat.PlayerProgression.Instance?.AwardXp(dialogue.xpReward, dialogue.name);
+                if (spawnOnFinish != null) spawnOnFinish.Begin();
+            }
         }
     }
 }

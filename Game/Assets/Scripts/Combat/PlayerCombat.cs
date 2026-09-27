@@ -5,6 +5,7 @@
 //  • Q / Y = Diwa Burst
 // All timings from AttackData ScriptableObjects (§56 exit gate: no hard-coded values).
 
+using System;
 using System.Collections;
 using Bayani.Core;
 using Bayani.Player;
@@ -284,9 +285,12 @@ namespace Bayani.Combat
         }
 
         /// <summary>Kill reward hook for enemies (ggd §56.2: kill = +6 Diwa).</summary>
+        public event Action<Enemy.EnemyData> OnKill;   // PlayerProgression listens for XP (§56.4)
+
         public void OnKillConfirmed(Enemy.EnemyData data)
         {
             resources?.AddDiwa(data.diwaOnKill);
+            OnKill?.Invoke(data);
         }
 
         private void SetMoveEnabled(bool value)

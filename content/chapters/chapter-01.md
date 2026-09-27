@@ -1,7 +1,7 @@
 # Chapter 1 — Echoes of Mactan ("The Blood Remembers")
 
 > Narrative canon: `docs/storyline.md` (SEQ 01–17 + the playable 07B/09B/10B/11 beats).
-> Systems canon: `docs/ggd.md` §56. This file is the **index** — content files below are the data.
+> Systems canon: `docs/ggd.md` §56; progression layer (XP/levels, death/respawn, skills 1–5): `docs/prd-progression.md`. This file is the **index** — content files below are the data.
 
 ## Sequences → what exists where
 
@@ -13,7 +13,7 @@
 | 09 | Mactan, Lapu-Lapu seen | `locations/mactan-1521.md`, `characters/lapu-lapu.md` | **graybox built** — Tools → BAYANI → Phase 2 Mactan (SC_04_Mactan) |
 | **09B** | **The Edge Awakens** (scan + stability HUD) | `characters/kai.md` | **graybox built** — shrine unfold + Balikan Edge scan + story-triggered headland pack in SC_04_Mactan |
 | 10 | Night before, the fire circle | `characters/ancestor.md` | **graybox built** — SEQ 10 fire-circle dialogue in SC_04_Mactan (ends on 10B collapse hook) |
-| **10B** | **Corrupted Anito** (cave mini-boss) | `enemies/corrupted-anito.md` | not built |
+| **10B** | **Corrupted Anito** (cave mini-boss) | `enemies/corrupted-anito.md` | **graybox built** — Tools → BAYANI → Phase 2 The Cave (expel-not-kill, stability 0→100 restore) |
 | 11 | The battle + **Memory Devourer** | `locations/battle-shore.md`, `enemies/memory-devourer.md` | not built |
 | 12–13 | Goodbye, the pull-back | `characters/ancestor.md` | not built |
 | 14–17 | Return, erased family, the blank page | `locations/ruins-2187.md` | not built |

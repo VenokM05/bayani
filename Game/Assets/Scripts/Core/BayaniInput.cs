@@ -1,7 +1,8 @@
 // BAYANI — Shared input layer: keyboard+mouse AND gamepad, live-polled each frame.
 // Both devices work simultaneously; whichever the player touches wins.
 // Mappings (ggd §41 subset): attack LMB/LT · block+parry hold RMB / hold X ·
-// dodge LCtrl / RT · skill Q / Y · jump Space / A · sprint Shift / L3 · move WASD / stick.
+// dodge LCtrl / RT · skill Q / Y · ACTIVE SKILLS 1–5 / dpad+east · ready-stow weapon G ·
+// jump Space / A · sprint Shift / L3 · move WASD / stick.
 // Later (Phase 2) this can become PlayerInput actions without touching gameplay code.
 
 using UnityEngine;
@@ -72,6 +73,29 @@ namespace Bayani.Core
         public static bool SkillPressed =>
             (Keyboard.current?.qKey.wasPressedThisFrame ?? false) ||   // was dKey — bug: D is strafe-right
             (Gamepad.current?.buttonNorth.wasPressedThisFrame ?? false);
+
+        // Active skill slots: number keys 1–5 (docs/prd-progression.md §3).
+        // i is 0-based; gamepad uses dpad up/right/left/down + buttonEast fallback.
+        // Verified against the installed Input System (Unity 6 build): the properties are
+        // digit1Key..digit5Key and the enum is Key.DigitN (singular) — NOT digitKeyN/Keys.
+        public static bool SkillSlotPressed(int i)
+        {
+            var kb = Keyboard.current;
+            var gp = Gamepad.current;
+            return i switch
+            {
+                0 => (kb?.digit1Key.wasPressedThisFrame ?? false) || (gp?.dpad.up.wasPressedThisFrame ?? false),
+                1 => (kb?.digit2Key.wasPressedThisFrame ?? false) || (gp?.dpad.right.wasPressedThisFrame ?? false),
+                2 => (kb?.digit3Key.wasPressedThisFrame ?? false) || (gp?.dpad.left.wasPressedThisFrame ?? false),
+                3 => (kb?.digit4Key.wasPressedThisFrame ?? false) || (gp?.dpad.down.wasPressedThisFrame ?? false),
+                4 => (kb?.digit5Key.wasPressedThisFrame ?? false) || (gp?.buttonEast.wasPressedThisFrame ?? false),
+                _ => false,
+            };
+        }
+
+        // Ready / stow the weapon — flips the armed/unarmed skill bar (PRD §4).
+        public static bool WeaponTogglePressed =>
+            (Keyboard.current?.gKey.wasPressedThisFrame ?? false);
 
         // Interact / pick up / dialogue advance: E or F / Enter / gamepad A (no combat use).
         public static bool InteractPressed =>

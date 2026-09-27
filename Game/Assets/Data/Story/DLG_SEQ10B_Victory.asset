@@ -10,24 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50060b8dc62b41a419acff01334cb145, type: 3}
-  m_Name: DLG_SEQ06_Arrival
+  m_Name: DLG_SEQ10B_Victory
   m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.DialogueAsset
   lines:
   - speaker: NARRATION
-    text: "Kai wakes up on a beach. Not the ruin-coast \u2014 a different shoreline,
-      an older sea."
+    text: One clean bell-strike, from somewhere behind the wall.
   - speaker: NARRATION
-    text: I had read about this moment.
+    text: The anito is driven back. Not deleted.
   - speaker: NARRATION
-    text: Ships from another world arrived in our islands.
+    text: The village memory re-anchors at 100%. The people wake like sleepers.
+  - speaker: TALA
+    text: "Codex written \u2014 SPIRITS. The corruption is not the anito's nature.
+      Something older is feeding through it."
   - speaker: NARRATION
-    text: But history had always been words on a page.
-  - speaker: NARRATION
-    text: Now...
-  - speaker: NARRATION
-    text: I was standing inside it.
-  - speaker: VILLAGER
-    text: The strangers have arrived.
-  - speaker: KAI
-    text: This is Cebu.
-  xpReward: 250
+    text: "A shrine bell token lies in the tide where it stood. (Codex HERITAGE \u2014
+      a key for later.)"

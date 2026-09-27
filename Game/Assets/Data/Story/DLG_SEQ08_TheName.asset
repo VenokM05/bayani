@@ -31,3 +31,4 @@ MonoBehaviour:
     text: I do.
   - speaker: ELDER
     text: Then perhaps you should be afraid of tomorrow.
+  xpReward: 350

@@ -17,5 +17,8 @@ namespace Bayani.Story
     public class DialogueAsset : ScriptableObject
     {
         public DialogueLine[] lines;
+
+        [Tooltip("Quest/objective XP granted when a StoryTrigger finishes this sequence (ggd §56.4: quests 250–800; 0 = none).")]
+        public int xpReward;
     }
 }

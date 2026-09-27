@@ -55,7 +55,10 @@ namespace Bayani.Story
             var res = FindFirstObjectByType<CombatResources>();
             if (res != null && data.diwaReward > 0f) res.AddDiwa(data.diwaReward);
             Core.MemoryStabilityZone.Current?.AddStability(data.stabilityReward, $"scan: {data.displayName}");
-            Debug.Log($"[BAYANI] ARTIFACT SCAN '{data.displayName}' [{data.historicalStatus}] → +{data.diwaReward:0} Diwa, +{data.stabilityReward:0} stability, +{data.xpReward:0} XP (ledger pending) — codex {data.codexCategory} entry queued");
+            // XP ledger now exists (PlayerProgression) — artifact award = §56.4's 50
+            if (data.xpReward > 0f)
+                FindFirstObjectByType<Bayani.Combat.PlayerProgression>()?.AwardXp(data.xpReward, data.displayName);
+            Debug.Log($"[BAYANI] ARTIFACT SCAN '{data.displayName}' [{data.historicalStatus}] → +{data.diwaReward:0} Diwa, +{data.stabilityReward:0} stability, +{data.xpReward:0} XP — codex {data.codexCategory} entry queued");
 
             _player = FindFirstObjectByType<PlayerController>();
             if (_player != null) _player.ControlsEnabled = false;

@@ -1339,6 +1339,8 @@ GameObject:
   - component: {fileID: 476401854}
   - component: {fileID: 476401853}
   - component: {fileID: 476401852}
+  - component: {fileID: 476401861}
+  - component: {fileID: 476401860}
   m_Layer: 0
   m_Name: Kai
   m_TagString: Player
@@ -1532,6 +1534,44 @@ Transform:
   - {fileID: 229832293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &476401860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476401851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf89e8502dc7de4e8cac48f556c462d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Combat.PlayerSkills
+  combat: {fileID: 476401852}
+  loadout:
+  - {fileID: 11400000, guid: f30f7fc7e08adf5478e77cbc28e6e182, type: 2}
+  - {fileID: 11400000, guid: 692de3ec48e96b54ca7cd09369260525, type: 2}
+  - {fileID: 11400000, guid: c7e3dd803adc2074f996137feadcff3b, type: 2}
+  - {fileID: 11400000, guid: ba2e210fd9b98fb43a82e30f3588736b, type: 2}
+  - {fileID: 11400000, guid: d0b894c757110134bb22d48e48eca7d0, type: 2}
+  - {fileID: 11400000, guid: 297ed0ecaaf22684783b0c6f9c74043b, type: 2}
+  - {fileID: 11400000, guid: 0acb4cc4f563a284f8cdf66f7d2a40fc, type: 2}
+  - {fileID: 11400000, guid: e163e0c7a8720a04ab40d082eb24f088, type: 2}
+  skillsPerBar: 4
+--- !u!114 &476401861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476401851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd75d6822effca34d84faa696e04d28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Combat.PlayerProgression
+  table: {fileID: 11400000, guid: 71c567731e7f7b549b450f4861592f83, type: 2}
+  resources: {fileID: 476401854}
+  combat: {fileID: 476401852}
 --- !u!1 &563952337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,6 +2766,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 476401859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1455376656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455376658}
+  - component: {fileID: 1455376657}
+  m_Layer: 0
+  m_Name: Checkpoint_Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1455376657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455376656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b27a21e921b09241ba7007d9777058d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Story.Checkpoint
+  respawnEuler: {x: 0, y: 0, z: 0}
+--- !u!4 &1455376658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455376656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494500306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,6 +2934,7 @@ GameObject:
   - component: {fileID: 1497442393}
   - component: {fileID: 1497442392}
   - component: {fileID: 1497442391}
+  - component: {fileID: 1497442394}
   m_Layer: 0
   m_Name: Story (DialoguePlayer + ScreenFader)
   m_TagString: Untagged
@@ -2895,6 +2981,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497442394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497442390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11148526ac98ff4d9ed2a69d503ae8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bayani.Player.DeathManager
+  deathHold: 2.5
+  mercyInvuln: 2
 --- !u!1 &1546660072
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,3 +4358,4 @@ SceneRoots:
   - {fileID: 1657432981}
   - {fileID: 245132427}
   - {fileID: 1563893614}
+  - {fileID: 1455376658}

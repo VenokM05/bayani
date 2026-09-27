@@ -27,9 +27,11 @@ namespace Bayani.Combat
         public bool IsDead => HP <= 0f;
 
         public event Action<string, float> OnResourceChanged;   // HUD hook ("diwa", +8)
+        public event Action OnDeath;                             // fires once when HP hits 0 — DeathManager listens
 
         private float _lastStaminaChangeTime = -10f;
         private bool _blocking;     // regen paused while blocking (Phase 1 later step)
+        private bool _deathFired;
 
         private void Awake()
         {
@@ -59,7 +61,31 @@ namespace Bayani.Combat
             HP = Mathf.Max(0f, HP - damage);
             _lastStaminaChangeTime = Time.time;   // being hit pauses your regen too
             OnResourceChanged?.Invoke("hp", -damage);
-            if (HP <= 0f) Debug.Log("[BAYANI] Kai is down — death/respawn flow arrives Phase 2.");
+            if (HP <= 0f && !_deathFired)
+            {
+                _deathFired = true;
+                OnDeath?.Invoke();
+            }
+        }
+
+        // ---- progression hooks (docs/prd-progression.md §1–2) ----
+
+        /// <summary>Permanent max-HP growth (level-up / checkpoint restore base). Heals the same amount.</summary>
+        public void GrowMaxHP(float delta)
+        {
+            maxHP = Mathf.Max(1f, maxHP + delta);
+            HP = Mathf.Min(maxHP, HP + Mathf.Max(0f, delta));
+            OnResourceChanged?.Invoke("hp", delta);
+        }
+
+        public void SetStaminaRegen(float perSec) => staminaRegenPerSec = Mathf.Max(0f, perSec);
+
+        /// <summary>Respawn / level-up restore: full HP + stamina, Diwa untouched (earned meter).</summary>
+        public void Refill()
+        {
+            HP = maxHP; Stamina = maxStamina;
+            _deathFired = false;
+            _lastStaminaChangeTime = -10f;
         }
 
         /// <summary>The ONLY way Diwa grows (plus scan, Phase 2): hit +2, perfect dodge +8, parry +12, kill +6.</summary>
